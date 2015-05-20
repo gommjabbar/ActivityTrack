@@ -13,7 +13,7 @@ namespace ActivityTrack.Business
             return "Ext";
         }
 
-        public ExtensionMethods()
+        public static void Test()
         {
             var o = new Object();
             var res = o.ToExt();
