@@ -53,3 +53,5 @@ E:\Work\Internship\ActivityTrack\ActivityTrack\bin\Microsoft.Owin.Security.Micro
 E:\Work\Internship\ActivityTrack\ActivityTrack\obj\Debug\ActivityTrack.csprojResolveAssemblyReference.cache
 E:\Work\Internship\ActivityTrack\ActivityTrack\obj\Debug\ActivityTrack.dll
 E:\Work\Internship\ActivityTrack\ActivityTrack\obj\Debug\ActivityTrack.pdb
+E:\Work\Internship\ActivityTrack\ActivityTrack\bin\ActivityTrack.Business.dll
+E:\Work\Internship\ActivityTrack\ActivityTrack\bin\ActivityTrack.Business.pdb
