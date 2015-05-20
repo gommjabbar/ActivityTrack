@@ -12,5 +12,6 @@ namespace ActivityTrack.Models
         public DateTime EndDate { get; set; }
         public string ActivityDescription { get; set; }
         public int ActivtyTypeId { get; set; }
+        public virtual ActivityType ActivityType { get; set; }
     }
 }

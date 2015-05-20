@@ -160,13 +160,24 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Controllers\ActivityTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505201422252_InitialCreate.cs" />
+    <Compile Include="Migrations\201505201422252_InitialCreate.Designer.cs">
+      <DependentUpon>201505201422252_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505201600254_Inheritance.cs" />
+    <Compile Include="Migrations\201505201600254_Inheritance.Designer.cs">
+      <DependentUpon>201505201600254_Inheritance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\ActivityType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -228,10 +239,19 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Activity\Create.cshtml" />
+    <Content Include="Views\Activity\Delete.cshtml" />
+    <Content Include="Views\Activity\Details.cshtml" />
+    <Content Include="Views\Activity\Edit.cshtml" />
+    <Content Include="Views\Activity\Index.cshtml" />
+    <Content Include="Views\ActivityType\Create.cshtml" />
+    <Content Include="Views\ActivityType\Delete.cshtml" />
+    <Content Include="Views\ActivityType\Details.cshtml" />
+    <Content Include="Views\ActivityType\Edit.cshtml" />
+    <Content Include="Views\ActivityType\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Activity\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -245,6 +265,14 @@
       <Project>{a4537504-9c0a-4efd-8fc3-d1174595423e}</Project>
       <Name>ActivityTrack.Business</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201505201422252_InitialCreate.resx">
+      <DependentUpon>201505201422252_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505201600254_Inheritance.resx">
+      <DependentUpon>201505201600254_Inheritance.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
