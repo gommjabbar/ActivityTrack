@@ -1,0 +1,5 @@
+E:\Work\Internship\ActivityTrack\ActivityTrack.Business\bin\Debug\ActivityTrack.Business.dll
+E:\Work\Internship\ActivityTrack\ActivityTrack.Business\bin\Debug\ActivityTrack.Business.pdb
+E:\Work\Internship\ActivityTrack\ActivityTrack.Business\obj\Debug\ActivityTrack.Business.csprojResolveAssemblyReference.cache
+E:\Work\Internship\ActivityTrack\ActivityTrack.Business\obj\Debug\ActivityTrack.Business.dll
+E:\Work\Internship\ActivityTrack\ActivityTrack.Business\obj\Debug\ActivityTrack.Business.pdb
