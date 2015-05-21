@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ActivityTrack.Models
 {
@@ -13,5 +14,6 @@ namespace ActivityTrack.Models
         public string ActivityDescription { get; set; }
         public int ActivtyTypeId { get; set; }
         public virtual ActivityType ActivityType { get; set; }
+        public IEnumerable<SelectListItem> TypesList { get; set; }
     }
 }

@@ -8,3 +8,8 @@ C:\Users\Marius\Desktop\Practica\ActivityTrack\ActivityTrack.Business\bin\Debug\
 C:\Users\Marius\Desktop\Practica\ActivityTrack\ActivityTrack.Business\obj\Debug\ActivityTrack.Business.csprojResolveAssemblyReference.cache
 C:\Users\Marius\Desktop\Practica\ActivityTrack\ActivityTrack.Business\obj\Debug\ActivityTrack.Business.dll
 C:\Users\Marius\Desktop\Practica\ActivityTrack\ActivityTrack.Business\obj\Debug\ActivityTrack.Business.pdb
+C:\Users\Marius\Desktop\Practica\LastProj\ActivityTrack\ActivityTrack.Business\bin\Debug\ActivityTrack.Business.dll
+C:\Users\Marius\Desktop\Practica\LastProj\ActivityTrack\ActivityTrack.Business\bin\Debug\ActivityTrack.Business.pdb
+C:\Users\Marius\Desktop\Practica\LastProj\ActivityTrack\ActivityTrack.Business\obj\Debug\ActivityTrack.Business.csprojResolveAssemblyReference.cache
+C:\Users\Marius\Desktop\Practica\LastProj\ActivityTrack\ActivityTrack.Business\obj\Debug\ActivityTrack.Business.dll
+C:\Users\Marius\Desktop\Practica\LastProj\ActivityTrack\ActivityTrack.Business\obj\Debug\ActivityTrack.Business.pdb

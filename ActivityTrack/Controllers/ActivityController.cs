@@ -38,7 +38,12 @@ namespace ActivityTrack.Controllers
         // GET: Activity/Create
         public ActionResult Create()
         {
-            return View();
+            var types = db.ActivityTypes;
+            var selectList = types.Select(thing => new SelectListItem {Text = thing.Type, Selected = false, Value = thing.Id.ToString()}).ToList();
+            var activity = new Activity();
+            activity.TypesList = selectList;
+
+            return View(activity);
         }
 
         // POST: Activity/Create
