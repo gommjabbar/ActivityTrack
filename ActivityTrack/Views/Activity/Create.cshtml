@@ -6,17 +6,6 @@
 
 <h2>Create</h2>
 
-<script type="text/javascript" src="/scripts/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="/scripts/moment.min.js"></script>
-<script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
-<script type="text/javascript" src="/scripts/bootstrap-datetimepicker.js"></script>
-
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker').datetimepicker();
-    });
-</script>
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -28,7 +17,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
                 @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -36,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control datetimepicker" } })
                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -79,4 +68,14 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript" src="/scripts/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/scripts/moment.min.js"></script>
+<script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="/scripts/bootstrap-datetimepicker.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker').datetimepicker();
+    });
+</script>
 }
