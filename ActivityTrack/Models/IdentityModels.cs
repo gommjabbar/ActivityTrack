@@ -11,6 +11,7 @@ namespace ActivityTrack.Models
     {
         public DbSet<Activity> Activities { get; set; }
         public DbSet<ActivityType> ActivityTypes { get; set; }
+        public DbSet<Project> Projects { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -35,5 +36,7 @@ namespace ActivityTrack.Models
         public System.Data.Entity.DbSet<ActivityTrack.Models.Activity> Activities { get; set; }
 
         public System.Data.Entity.DbSet<ActivityTrack.Models.ActivityType> ActivityTypes { get; set; }
+
+        public System.Data.Entity.DbSet<ActivityTrack.Models.Project> Projects { get; set; }
     }
 }
