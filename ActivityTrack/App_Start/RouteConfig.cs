@@ -18,6 +18,18 @@ namespace ActivityTrack
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Index",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Activity", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+               name: "Add",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Activity", action = "Create", id = UrlParameter.Optional }
+           );
         }
     }
 }
