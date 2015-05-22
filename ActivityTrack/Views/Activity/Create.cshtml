@@ -9,10 +9,10 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
+
+    <div class="form-horizontal" ng-controller="newActivityController">
         <h4 id="h4">Activity</h4>
-        
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -40,24 +40,25 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ActivtyTypeId, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.ActivtyTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.ActivtyTypeId, Model.TypesList, "Select a Type", new {@class = "form-control"})
-                @Html.ValidationMessageFor(model => model.ActivtyTypeId, "", new {@class = "text-danger"})
+                @Html.DropDownListFor(m => m.ActivtyTypeId, Model.TypesList, "Select a Type", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ActivtyTypeId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.ProjectId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @*<div class="col-md-10">
                 @Html.EditorFor(model => model.ProjectId, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProjectId, "", new { @class = "text-danger" })
-            </div>
-
-            <input type="button" id="btnShowNewProject" value="Hide" onclick="showNewProject()" />
-            <div id="newProjectDiv">
-                <input type="text" id="projectName" />
-                <input type="button" id="btnSaveNewProject" value="Save" onclick="saveProject()" />
+            </div>*@
+            <select ng-model="activity.project"
+                    ng-options="project.name for project in allProjects track by project.id"></select>
+            <input type="button" id="btnShowNewProject" value="Hide" ng-click="showHide()" />
+            <div ng-show="showNewProject">
+                <input type="text" ng-model="newProject.name"/>
+                <input type="button" id="btnSaveNewProject" value="Save" ng-click="saveProject()" />
             </div>
         </div>
 
@@ -77,6 +78,43 @@
     @Scripts.Render("~/bundles/jqueryval")
 
 <script type="text/javascript">
+
+    var app = angular.module("activityTrack");
+    app.controller("newActivityController", function ($scope) {
+
+        $scope.showNewProject = false;
+        $scope.newProject = {
+            id: -1,
+            name: 'Change the name'
+        }
+        $scope.allProjects = [
+            { id: 1, name: "ActivityTrack"},
+            { id: 2, name: "Other" },
+        ]
+        $scope.activity = {
+            project: $scope.allProjects[0]
+        }
+        $scope.saveProject = function () {
+            var data = JSON.stringify($scope.newProject);
+            $.ajax(
+            {
+                url: '/Project/Add',
+                type: 'post',
+                data: { name: 'a', id: 1 }
+            }).done(function (data) {
+                
+                $scope.allProjects.push(data);
+                $scope.$apply();
+            })
+            
+        }
+        $scope.showHide = function () {
+            $scope.showNewProject = !$scope.showNewProject;
+        }
+    });
+
+
+
     var shown = false;
     $('#newProjectDiv').hide();
     function showNewProject() {

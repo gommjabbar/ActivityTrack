@@ -59,12 +59,23 @@ namespace ActivityTrack.Controllers
             return View(project);
         }
 
-
+        public class ProjectDTO
+        {
+            public int id { get; set; }
+            public string name { get; set; }
+        }
         [HttpPost]
         [Route("/Project/Add")]
-        public ActionResult Add(string name)
+        public ActionResult Add(ProjectDTO project)
         {
-            return Json(new { id = 1 });
+            if (ModelState.IsValid)
+            {
+                if (project.id < 0)
+                    project.id = 100;
+                project.name = "test";
+            }
+            var v = Request.Params;
+            return Json(project);
         }
 
         // GET: Project/Edit/5
