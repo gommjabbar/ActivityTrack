@@ -15,6 +15,7 @@ namespace ActivityTrack.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Project
+        [Route("Index",Name="AllProjects")]
         public ActionResult Index()
         {
             return View(db.Projects.ToList());
@@ -56,6 +57,14 @@ namespace ActivityTrack.Controllers
             }
 
             return View(project);
+        }
+
+
+        [HttpPost]
+        [Route("/Project/Add")]
+        public ActionResult Add(string name)
+        {
+            return Json(new { id = 1 });
         }
 
         // GET: Project/Edit/5

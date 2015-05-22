@@ -13,41 +13,41 @@ namespace ActivityTrack
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-               name: "IndexProject",
-               url: "Project/Index/{id}",
-               defaults: new { controller = "Project", action = "Index", id = UrlParameter.Optional }
-           );
+           // routes.MapRoute(
+           //    name: "IndexProject",
+           //    url: "Project/Index/{id}",
+           //    defaults: new { controller = "Project", action = "Index", id = UrlParameter.Optional }
+           //);
 
-            routes.MapRoute(
-               name: "AddProject",
-               url: "Project/Add/{id}",
-               defaults: new { controller = "Project", action = "Create", id = UrlParameter.Optional }
-           );
+           // routes.MapRoute(
+           //    name: "AddProject",
+           //    url: "Project/Add/{id}",
+           //    defaults: new { controller = "Project", action = "Create", id = UrlParameter.Optional }
+           //);
 
-            routes.MapRoute(
-               name: "ActivityTypeIndex",
-               url: "ActivityType/Index/{id}",
-               defaults: new { controller = "ActivityType", action = "Index", id = UrlParameter.Optional }
-           );
+           // routes.MapRoute(
+           //    name: "ActivityTypeIndex",
+           //    url: "ActivityType/Index/{id}",
+           //    defaults: new { controller = "ActivityType", action = "Index", id = UrlParameter.Optional }
+           //);
 
-            routes.MapRoute(
-               name: "AddActivityType",
-               url: "ActivityType/Add/{id}",
-               defaults: new { controller = "ActivityType", action = "Create", id = UrlParameter.Optional }
-           );
+           // routes.MapRoute(
+           //    name: "AddActivityType",
+           //    url: "ActivityType/Add/{id}",
+           //    defaults: new { controller = "ActivityType", action = "Create", id = UrlParameter.Optional }
+           //);
 
-            routes.MapRoute(
-               name: "ActivityIndex",
-               url: "Activity/Index/{id}",
-               defaults: new { controller = "Activity", action = "Index", id = UrlParameter.Optional }
-           );
+           // routes.MapRoute(
+           //    name: "ActivityIndex",
+           //    url: "Activity/Index/{id}",
+           //    defaults: new { controller = "Activity", action = "Index", id = UrlParameter.Optional }
+           //);
 
-            routes.MapRoute(
-               name: "AddActivity",
-               url: "Activity/Add/{id}",
-               defaults: new { controller = "Activity", action = "Create", id = UrlParameter.Optional }
-           );
+           // routes.MapRoute(
+           //    name: "AddActivity",
+           //    url: "Activity/Add/{id}",
+           //    defaults: new { controller = "Activity", action = "Create", id = UrlParameter.Optional }
+           //);
 
             routes.MapRoute(
                 name: "Default",

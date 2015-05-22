@@ -77,7 +77,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 
 <script type="text/javascript">
-    var shown = true;
+    var shown = false;
     $('#newProjectDiv').hide();
     function showNewProject() {
         if (shown) {
@@ -90,6 +90,23 @@
             $('#btnShowNewProject').val('Hide');
             shown = true;
         }
+    }
+    function saveProject() {
+        var projectName = $('#projectName').val();
+        $.ajax(
+            {
+                url: '/Project/Add',
+                type: 'post',
+                data: {
+                    name: projectName
+                }
+            })
+            .done(function (data) {
+                alert(data.id)
+            })
+            .error(function (e) {
+                alert('error');
+            })
     }
     //var test = {};
     //test.f = function () { alert(); }
