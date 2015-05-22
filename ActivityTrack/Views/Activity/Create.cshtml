@@ -11,7 +11,8 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Activity</h4>
+        <h4 id="h4">Activity</h4>
+        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -52,6 +53,12 @@
                 @Html.EditorFor(model => model.ProjectId, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProjectId, "", new { @class = "text-danger" })
             </div>
+
+            <input type="button" id="btnShowNewProject" value="Hide" onclick="showNewProject()" />
+            <div id="newProjectDiv">
+                <input type="text" id="projectName" />
+                <input type="button" id="btnSaveNewProject" value="Save" onclick="saveProject()" />
+            </div>
         </div>
 
         <div class="form-group">
@@ -68,14 +75,31 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script type="text/javascript" src="/scripts/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="/scripts/moment.min.js"></script>
-<script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
-<script type="text/javascript" src="/scripts/bootstrap-datetimepicker.js"></script>
 
 <script type="text/javascript">
+    var shown = true;
+    $('#newProjectDiv').hide();
+    function showNewProject() {
+        if (shown) {
+            $('#newProjectDiv').hide();
+            $('#btnShowNewProject').val('Show');
+            shown = false;
+        }
+        else {
+            $('#newProjectDiv').show();
+            $('#btnShowNewProject').val('Hide');
+            shown = true;
+        }
+    }
+    //var test = {};
+    //test.f = function () { alert(); }
+    //test.f();
+    //test["f"]();
+    //test.f = 123;
+    
     $(function () {
-        $('#datetimepicker').datetimepicker();
+
+        $('#StartDate').datetimepicker();
     });
 </script>
 }
