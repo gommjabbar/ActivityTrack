@@ -12,15 +12,29 @@ using ActivityTrack.Models;
 
 namespace ActivityTrack.Controllers
 {
-    public class ProjectAPIController : ApiController
+    public class ProjectsAPIController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        [HttpGet]
+        [Route("api/projects")]
+        public IHttpActionResult GetAll()
+        {
+            //TODO return all projects
+            return Json(new { });
+        }
 
+        [HttpGet]
+        [Route("api/projects/{id}")]
+        public IHttpActionResult Get(int id)
+        {
+            //TODO return all projects
+            return Json(new { });
+        }
 
 
         [HttpPost]
-        [Route("/Project/Add")]
+        [Route("api/projects")]
         public IHttpActionResult Add(Project project)
         {
             if (ModelState.IsValid)

@@ -42,7 +42,7 @@ namespace ActivityTrack.Controllers
             var selectList = types.Select(thing => new SelectListItem {Text = thing.Type, Selected = false, Value = thing.Id.ToString()}).ToList();
             var activity = new Activity();
             activity.TypesList = selectList;
-
+            activity.StartDate = DateTime.Today;
             return View(activity);
         }
 
