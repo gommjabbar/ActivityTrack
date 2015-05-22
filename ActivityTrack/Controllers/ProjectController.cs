@@ -65,7 +65,7 @@ namespace ActivityTrack.Controllers
             public string name { get; set; }
         }
         [HttpPost]
-        [Route("/Project/Add")]
+        [Route("/Project/Addss")]
         public ActionResult Add(ProjectDTO project)
         {
             if (ModelState.IsValid)
