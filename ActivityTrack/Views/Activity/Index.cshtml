@@ -4,29 +4,29 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Activities</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered">
     <tr>
-        <th>
+        <th width="15%">
             @Html.DisplayNameFor(model => model.StartDate)
         </th>
-        <th>
+        <th width="15%">
             @Html.DisplayNameFor(model => model.EndDate)
         </th>
-        <th>
+        <th width="40%">
             @Html.DisplayNameFor(model => model.ActivityDescription)
         </th>
-        <th>
+        <th width="20%">
             @Html.DisplayNameFor(model => model.ActivtyTypeId)
         </th>
-        <th>
+        <th width="10%">
             @Html.DisplayNameFor(model => model.ProjectId)
         </th>
-        <th></th>
+        @*<th></th>*@
     </tr>
 
 @foreach (var item in Model) {
