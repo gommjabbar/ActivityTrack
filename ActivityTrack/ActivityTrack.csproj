@@ -177,7 +177,6 @@
     <Compile Include="Controllers\ActivityTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\ProjectsAPIController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Global.asax.cs">
