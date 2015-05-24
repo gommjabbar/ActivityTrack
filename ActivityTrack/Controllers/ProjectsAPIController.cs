@@ -32,6 +32,22 @@ namespace ActivityTrack.Controllers
             return Json(new { });
         }
 
+        //R: GET: api/projects/{id}
+
+        [HttpGet]
+        [Route("api/projects/{id}")]
+        public IHttpActionResult GetProjectById(int projectId)
+        {
+            return Json(db.Projects.Find(projectId));
+        }
+
+        [HttpGet]
+        [Route("api/projects")]
+        public IHttpActionResult GettAll()
+        {
+            return Json(db.Projects.ToList());
+        }
+
 
         [HttpPost]
         [Route("api/projects")]
@@ -39,56 +55,12 @@ namespace ActivityTrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (project.Id < 0)
-                    project.Id = 100;
-                project.Name = "test";
+                db.Projects.Add(project);
+                db.SaveChanges();
             }
             return Json(project);
         }
 
-        // POST: api/ProjectAPI
-        [ResponseType(typeof(Project))]
-        public IHttpActionResult PostProject(Project project)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            db.Projects.Add(project);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = project.Id }, project);
-        }
-
-        // DELETE: api/ProjectAPI/5
-        [ResponseType(typeof(Project))]
-        public IHttpActionResult DeleteProject(int id)
-        {
-            Project project = db.Projects.Find(id);
-            if (project == null)
-            {
-                return NotFound();
-            }
-
-            db.Projects.Remove(project);
-            db.SaveChanges();
-
-            return Ok(project);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool ProjectExists(int id)
-        {
-            return db.Projects.Count(e => e.Id == id) > 0;
-        }
     }
 }
