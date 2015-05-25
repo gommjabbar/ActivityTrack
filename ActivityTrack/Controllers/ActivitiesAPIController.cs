@@ -26,7 +26,7 @@ namespace ActivityTrack.Controllers
         }
 
         [HttpGet]
-        [Route("api/activities?offset&length")]
+        [Route("api/activities/offset&length")]
         public IHttpActionResult GetFromTo(int offset, int length)
         {
             var result = db.Activities
