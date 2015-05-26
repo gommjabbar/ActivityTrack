@@ -241,6 +241,9 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\App\Project\Services\projectServices.js" />
+    <Content Include="Scripts\App\Activity\Controllers\createActivityController.js" />
+    <Content Include="Scripts\App\Activity\Services\activityServices.js" />
     <Content Include="Scripts\App\app.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -1107,7 +1110,10 @@
     <Content Include="Views\ActivityType\Index.cshtml" />
     <Content Include="Scripts\version.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DTO\" />
+    <Folder Include="Scripts\App\Project\Controllers\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

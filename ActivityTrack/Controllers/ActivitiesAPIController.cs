@@ -24,7 +24,15 @@ namespace ActivityTrack.Controllers
                 .ToList();
             return Json(result);
         }
-
+        [HttpGet]
+        [Route("api/activities/{activityId}")]
+        public IHttpActionResult GetActivity(int activityId)
+        {
+            //var result = db.Activities
+            //    .Where(activity => activity.ProjectId == projectId)
+            //    .ToList();
+            return Json(new { });
+        }
         [HttpGet]
         [Route("api/activities/offset&length")]
         public IHttpActionResult GetFromTo(int offset, int length)
