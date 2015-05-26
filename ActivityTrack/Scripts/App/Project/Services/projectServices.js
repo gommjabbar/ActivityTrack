@@ -4,10 +4,9 @@
     app.service("projectService", function () {
         return {
             addNewProject: function (data) {
-                debugger;
                 return $.ajax(
                 {
-                    url: 'api/projects',
+                    url: '/api/projects',
                     type: 'post',
                     data: data
                 });

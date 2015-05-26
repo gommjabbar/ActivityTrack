@@ -1,8 +1,8 @@
 ﻿(function() {
     var app = angular.module("activityTrack");
-    app.controller("newActivityController", ['$scope','activityService','projectService',
+    app.controller("newProjectController", ['$scope','projectService',
 
-         function ($scope, activityService, projectService) {
+         function ($scope, projectService) {
              $scope.newProjectButtonText = 'Add';
              $scope.showNewProject = false;
              $scope.newProject = {
@@ -27,28 +27,7 @@
                      $scope.$apply();
                  })
              }
-
-             $scope.addActivity = function () {
-                 $.ajax(
-                 {
-                     url: '/api/activities',
-                     type: 'post',
-                     data: {
-                         startdate: 'asdas',
-                         enddate: 'asdas',
-                         description: 'sdfsfd',
-                         project: 'asdas',
-                         //startdate: activity.startdate,
-                         //enddate: activity.enddate,
-                         //description: activity.description,
-                         //project: activity.project
-                     }
-                 }).done(function (data) {
-                     $scope.activity.push(data);
-                     $scope.$apply();
-                 })
-             }
-
+                          
              $scope.showHide = function () {
                  $scope.showNewProject = !$scope.showNewProject;
                  if ($scope.showNewProject) {
