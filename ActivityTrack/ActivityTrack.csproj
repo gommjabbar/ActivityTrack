@@ -207,6 +207,7 @@
     <Compile Include="Repository\ActivityRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\IActivityRepository.cs" />
+    <Compile Include="Repository\IGenericRepository.cs" />
     <Compile Include="Repository\IProjectRepository.cs" />
     <Compile Include="Repository\ProjectRepository.cs" />
     <Compile Include="Startup.cs" />

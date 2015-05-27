@@ -7,13 +7,8 @@ using ActivityTrack.Models;
 
 namespace ActivityTrack.Repository
 {
-    public interface IProjectRepository
+    public interface IProjectRepository: IGenericRepository<Project>
     {
-        IEnumerable<Project> Get(Expression<Func<Project, bool>> filter = null, Func<IQueryable<Project>, IOrderedQueryable<Project>> orderBy = null, string includeProperties = "");
-        Project GetByID(object id);
-        void Insert(Project entity);
-        void Delete(object id);
-        void Delete(Project entityToDelete);
-        void Update(Project entityToUpdate);
+
     }
 }

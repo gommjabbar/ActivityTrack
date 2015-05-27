@@ -7,7 +7,7 @@ using ActivityTrack.Models;
 
 namespace ActivityTrack.Repository
 {
-    public class GenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         internal ApplicationDbContext  context;
         internal DbSet<TEntity> dbSet;
