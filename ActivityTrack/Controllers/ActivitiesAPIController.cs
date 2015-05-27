@@ -1,7 +1,4 @@
 ﻿using ActivityTrack.Models;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 using System.Web.Http;
 using ActivityTrack.Repository;
 
@@ -22,7 +19,7 @@ namespace ActivityTrack.Controllers
         [Route("api/activities/{activityId}")]
         public IHttpActionResult GetActivity(int activityId)
         {
-            var result = _ar.GetByID(activityId);
+            var result = _ar.GetById(activityId);
             return Json(new { });
         }
         [HttpGet]
