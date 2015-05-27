@@ -9,58 +9,60 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ActivityTrack.Models;
+using ActivityTrack.Repository;
 
 namespace ActivityTrack.Controllers
 {
     public class ProjectsAPIController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IProjectRepository _pr = new ProjectRepository();
 
         [HttpGet]
         [Route("api/projects")]
         public IHttpActionResult GetAll()
         {
-            //TODO return all projects
-            return Json(new { });
+            var result = _pr.Get();
+            return Json(result);
         }
 
         [HttpGet]
         [Route("api/projects/{id}")]
         public IHttpActionResult Get(int id)
         {
-            //TODO return all projects
-            return Json(new { });
+            var result = _pr.GetByID(id);
+            return Json(result);
         }
-
-        //R: GET: api/projects/{id}
-
-        [HttpGet]
-        [Route("api/projects/{id}")]
-        public IHttpActionResult GetProjectById(int projectId)
-        {
-            return Json(db.Projects.Find(projectId));
-        }
-
-        [HttpGet]
-        [Route("api/projects")]
-        public IHttpActionResult GettAll()
-        {
-            return Json(db.Projects.ToList());
-        }
-
 
         [HttpPost]
         [Route("api/projects")]
         public IHttpActionResult Add(Project project)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Projects.Add(project);
-                db.SaveChanges();
+                return BadRequest(ModelState);
             }
+            _pr.Insert(project);
             return Json(project);
         }
 
+        [HttpPut]
+        [Route("api/projects")]
+        public IHttpActionResult Update(int id, Project project)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != project.Id)
+            {
+                return BadRequest();
+            }
+
+            _pr.Update(project);
+
+            return Json(project);
+        }
 
     }
 }

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ActivityTrack.Models
 {
-    public class DTOActivity
+    public class ActivityDTO
     {
         public int id { get; set; }
         public DateTime startdate { get; set; }

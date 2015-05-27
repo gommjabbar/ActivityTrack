@@ -1,45 +1,35 @@
 ﻿using ActivityTrack.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
+using ActivityTrack.Repository;
 
 namespace ActivityTrack.Controllers
 {
     public class ActivitiesAPIController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IActivityRepository _ar = new ActivityRepository();
 
         [HttpGet]
         [Route("api/projects/{projectId}/activities")]
         public IHttpActionResult Get(int projectId)
         {
-            var result = db.Activities
-                .Where(activity => activity.ProjectId == projectId)
-                .ToList();
+            var result = _ar.ProjectActivities(projectId);
             return Json(result);
         }
         [HttpGet]
         [Route("api/activities/{activityId}")]
         public IHttpActionResult GetActivity(int activityId)
         {
-            //var result = db.Activities
-            //    .Where(activity => activity.ProjectId == projectId)
-            //    .ToList();
+            var result = _ar.GetByID(activityId);
             return Json(new { });
         }
         [HttpGet]
-        [Route("api/activities/offset&length")]
+        [Route("api/activities")]
         public IHttpActionResult GetFromTo(int offset, int length)
         {
-            var result = db.Activities
-                .Where(activity => activity.ProjectId >= offset && activity.ProjectId < offset+length)
-                .ToList();
+            var result = _ar.GetFromTo(offset, length);
             return Json(result);
         }
 
@@ -51,9 +41,7 @@ namespace ActivityTrack.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            db.Activities.Add(activity);
-            db.SaveChanges();
+            _ar.Insert(activity);
             return Json(activity);
         }
 
@@ -71,29 +59,9 @@ namespace ActivityTrack.Controllers
                 return BadRequest();
             }
 
-            db.Entry(activity).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-                return Json(activity);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ActivityExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-        }
-
-        private bool ActivityExists(int id)
-        {
-            return db.Activities.Count(e => e.Id == id) > 0;
+            _ar.Update(activity);
+            
+            return Json(activity);
         }
     }
 }
