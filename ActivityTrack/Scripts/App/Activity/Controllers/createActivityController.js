@@ -33,16 +33,7 @@
                  {
                      url: '/api/activities',
                      type: 'post',
-                     data: {
-                         startdate: 'asdas',
-                         enddate: 'asdas',
-                         description: 'sdfsfd',
-                         project: 'asdas',
-                         //startdate: activity.startdate,
-                         //enddate: activity.enddate,
-                         //description: activity.description,
-                         //project: activity.project
-                     }
+                     data: JSON.stringify($scope.activity)                     
                  }).done(function (data) {
                      $scope.activity.push(data);
                      $scope.$apply();
