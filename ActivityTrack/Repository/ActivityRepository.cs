@@ -9,12 +9,12 @@ namespace ActivityTrack.Repository
     {
         public ActivityRepository()
         {
-            this.context = new ApplicationDbContext();
+            Context = new ApplicationDbContext();
         }
         public ActivityRepository(ApplicationDbContext context)
         {
-            this.context = context;
-            this.dbSet = context.Set<ActivityEO>();
+            Context = context;
+            DbSet = context.Set<ActivityEO>();
         }
 
         public List<ActivityEO> GetFromTo(int offset, int length)
@@ -22,7 +22,7 @@ namespace ActivityTrack.Repository
             // Return a list of activities that have id between "offset" and "offset"+"length"
             // Shortly, extracts first "length" activities starting from "offset"
 
-            var result = dbSet
+            var result = DbSet
                 .Where(activity => activity.ProjectId >= offset && activity.ProjectId < offset + length)
                 .ToList();
             return result;
@@ -32,7 +32,7 @@ namespace ActivityTrack.Repository
         {
             //Return a list of activities of specific project with id projectId
 
-            var result = dbSet
+            var result = DbSet
                 .Where(activity => activity.ProjectId == projectId)
                 .ToList();
             return result;
