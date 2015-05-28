@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ActivityTrack.Controllers;
+using ActivityTrack.DTO;
 
 namespace ActivityTrack.IntegrationTests
 {
@@ -12,7 +13,7 @@ namespace ActivityTrack.IntegrationTests
         {
             var controller = new ActivitiesAPIController();
 
-            var result = controller.Add(new DTO.activity());
+            var result = controller.Add(new activity());
 
             
         }

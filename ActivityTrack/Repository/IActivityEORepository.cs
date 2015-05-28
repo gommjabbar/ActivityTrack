@@ -7,7 +7,7 @@ using ActivityTrack.Models;
 
 namespace ActivityTrack.Repository
 {
-    public interface IActivityRepository: IGenericRepository<ActivityEO>
+    public interface IActivityEORepository: IGenericRepository<ActivityEO>
     { 
         List<ActivityEO> GetFromTo(int offset, int length);
         List<ActivityEO> ProjectActivities(int projectId);

@@ -1,4 +1,6 @@
-﻿using ActivityTrack.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using ActivityTrack.Models;
 using System.Web.Http;
 using ActivityTrack.Repository;
 using ActivityTrack.DTO;
@@ -8,61 +10,77 @@ namespace ActivityTrack.Controllers
 {
     public class ActivitiesAPIController : ApiController
     {
-        private IActivityRepository _ar = new ActivityRepository();
+        private IActivityEORepository _ar = new ActivityEORepository();
 
         [HttpGet]
         [Route("api/projects/{projectId}/activities")]
         public IHttpActionResult Get(int projectId)
         {
-            var result = _ar.ProjectActivities(projectId);
-            return Json(result);
+            var activitiesEO = _ar.ProjectActivities(projectId);
+
+            List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
+
+            return Json(activitiesDTO);
         }
         [HttpGet]
         [Route("api/activities/{activityId}")]
         public IHttpActionResult GetActivity(int activityId)
         {
-            var result = _ar.GetById(activityId);
-            return Json(new { });
+            var activityEO = _ar.GetById(activityId);
+
+            var activityDTO = Mapper.Map<activity>(activityEO);
+
+            return Json(activityDTO);
         }
         [HttpGet]
         [Route("api/activities")]
         public IHttpActionResult GetFromTo(int offset, int length)
         {
-            var result = _ar.GetFromTo(offset, length);
-            return Json(result);
+            var activitiesEO = _ar.GetFromTo(offset, length);
+
+            List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
+
+            return Json(activitiesDTO);
         }
 
         [HttpPost]
         [Route("api/activities")]
-        public IHttpActionResult Add(activity activity)
+        public IHttpActionResult Add(activity activityDTO)
         {
+            var activityEO = Mapper.Map<ActivityEO>(activityDTO);
+
             if (!ModelState.IsValid)
             {
                  return BadRequest(ModelState);
             }
-            //var a = new ActivityEO();
-            //a.ActivityDescription = activity.description;
-            //_ar.Insert(activity);
-            return Json(activity);
+
+            _ar.Insert(activityEO);
+
+            return Json(activityDTO);
         }
 
         [HttpPut]
         [Route("api/activities")]
-        public IHttpActionResult Update(int id, ActivityEO activity)
+        public IHttpActionResult Update(int id, activity activityDTO)
         {
+            var activityEO = Mapper.Map<ActivityEO>(activityDTO);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != activity.Id)
+            if (id != activityEO.Id)
             {
                 return BadRequest();
             }
 
-            _ar.Update(activity);
             
-            return Json(activity);
+            _ar.Insert(activityEO);
+
+            _ar.Update(activityEO);
+            
+            return Json(activityDTO);
         }
     }
 }

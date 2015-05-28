@@ -2,7 +2,7 @@
 
 namespace ActivityTrack.Repository
 {
-    public interface IProjectRepository: IGenericRepository<Project>
+    public interface IProjectEORepository: IGenericRepository<ProjectEO>
     {
 
     }

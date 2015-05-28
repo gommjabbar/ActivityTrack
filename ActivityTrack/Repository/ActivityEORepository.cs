@@ -5,13 +5,13 @@ using ActivityTrack.Models;
 
 namespace ActivityTrack.Repository
 {
-    public class ActivityRepository: GenericRepository<ActivityEO>, IActivityRepository
+    public class ActivityEORepository: GenericRepository<ActivityEO>, IActivityEORepository
     {
-        public ActivityRepository()
+        public ActivityEORepository()
         {
             Context = new ApplicationDbContext();
         }
-        public ActivityRepository(ApplicationDbContext context)
+        public ActivityEORepository(ApplicationDbContext context)
         {
             Context = context;
             DbSet = context.Set<ActivityEO>();
