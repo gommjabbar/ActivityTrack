@@ -6,12 +6,12 @@ namespace ActivityTrack.Repository
     {
         public ProjectRepository()
         {
-            this.context = new ApplicationDbContext();
+            Context = new ApplicationDbContext();
         }
         public ProjectRepository(ApplicationDbContext context)
         {
-            this.context = context;
-            this.dbSet = context.Set<Project>();
+            Context = context;
+            DbSet = context.Set<Project>();
         }
     }
 }
