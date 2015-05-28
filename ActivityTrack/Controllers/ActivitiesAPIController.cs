@@ -14,24 +14,36 @@ namespace ActivityTrack.Controllers
 
         [HttpGet]
         [Route("api/projects/{projectId}/activities")]
-        public IHttpActionResult Get(int projectId)
+        public IHttpActionResult GetActivitiesOfProject(int projectId)
         {
             var activitiesEO = _ar.ProjectActivities(projectId);
+
+            if (activitiesEO == null)
+            {
+                return BadRequest();
+            }
 
             List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
 
             return Json(activitiesDTO);
         }
+
         [HttpGet]
         [Route("api/activities/{activityId}")]
         public IHttpActionResult GetActivity(int activityId)
         {
             var activityEO = _ar.GetById(activityId);
 
+            if (activityEO == null)
+            {
+                return BadRequest();
+            }
+
             var activityDTO = Mapper.Map<activity>(activityEO);
 
             return Json(activityDTO);
         }
+
         [HttpGet]
         [Route("api/activities")]
         public IHttpActionResult GetFromTo(int offset, int length)

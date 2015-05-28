@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ActivityTrack.Controllers;
 using ActivityTrack.DTO;
@@ -98,6 +99,133 @@ namespace ActivityTrack.IntegrationTests
 
             var test3 = JsonConvert.SerializeObject(a1);
             Debug.Assert(result3.ToString() != test3);
+        }
+
+        [TestMethod]
+        public void Get_ActivityWithDataResult()
+        {
+            //activity is found in db, so it has to be different from BadResult
+            var ctrl = new ActivitiesAPIController();
+
+            var result1 = ctrl.GetActivity(1);
+            Assert.IsNotInstanceOfType(result1, typeof(BadRequestResult));
+
+            var result2 = ctrl.GetActivity(2);
+            Assert.IsNotInstanceOfType(result2, typeof(BadRequestResult));
+        }
+
+        [TestMethod]
+        public void Get_ActivityNoDataResult()
+        {
+            //activity is not found in db, so it has to be BadResult
+            var ctrl = new ActivitiesAPIController();
+
+            var result1 = ctrl.GetActivity(15000);
+            Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
+
+            var result2 = ctrl.GetActivity(16000);
+            Assert.IsInstanceOfType(result2, typeof(BadRequestResult));
+        }
+
+        [TestMethod]
+        public void Get_ActivitiesOfProjectWithDataResult()
+        {
+            //the project has some activities, si it has to be different from BadRequest
+            var ctrl = new ActivitiesAPIController();
+
+            var result1 = ctrl.GetActivitiesOfProject(1);
+            Assert.IsNotInstanceOfType(result1, typeof(BadRequestResult));
+
+            var result2 = ctrl.GetActivitiesOfProject(1);
+            Assert.IsNotInstanceOfType(result2, typeof(BadRequestResult));
+        }
+
+        [TestMethod]
+        public void Get_ActivitiesOfProjectNoDataResult()
+        {
+            //the project does not have activities, so it has to be BadRequest
+            var ctrl = new ActivitiesAPIController();
+
+            var result1 = ctrl.GetActivitiesOfProject(21000);
+            Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
+
+            var result2 = ctrl.GetActivitiesOfProject(20000);
+            Assert.IsInstanceOfType(result2, typeof(BadRequestResult));
+        }
+
+        [TestMethod]
+        public void Get_ActivitiesFromToWithDataResult()
+        {
+            //there are some activities between offset and offset+length, so it has to be different from BadRequest
+            var ctrl = new ActivitiesAPIController();
+
+            var result1 = ctrl.GetFromTo(1,2);
+            Assert.IsNotInstanceOfType(result1, typeof(BadRequestResult));
+
+            var result2 = ctrl.GetFromTo(2,10);
+            Assert.IsNotInstanceOfType(result2, typeof(BadRequestResult));
+        }
+
+        [TestMethod]
+        public void Get_ActivitiesFromToNoDataResult()
+        {
+            //there are not activities between offset and offset+length, so it has to be BadRequest
+            var ctrl = new ActivitiesAPIController();
+
+            var result1 = ctrl.GetFromTo(10000, 2);
+            Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
+
+            var result2 = ctrl.GetFromTo(12000, 1);
+            Assert.IsInstanceOfType(result2, typeof(BadRequestResult));
+        }
+
+        [TestMethod]
+        public void Update_ActivityGoodData()
+        {
+
+            //succes -> return Json(activityDTO) 
+            //fail -> return BadRequest(ModelState) -> something else than succes is considered fail
+
+            var ctrl = new ActivitiesAPIController();
+
+            //all fields completed and id coresponds with a1.id
+            var a1 = new activity();
+
+            a1.id = 1;
+            a1.startDate = DateTimeOffset.Now;
+            a1.endDate = DateTimeOffset.Now;
+            a1.description = "test";
+            a1.activtyTypeId = 1;
+            a1.projectId = 1;
+
+            var result1 = ctrl.Update(1, a1);
+
+            var test = JsonConvert.SerializeObject(a1);
+            Debug.Assert(result1.ToString() == test);
+
+        }
+
+        [TestMethod]
+        public void Update_ActivityIdDifferentFromActivityId()
+        {
+
+
+            var ctrl = new ActivitiesAPIController();
+
+            //all fields completed and id does not corespond with a1.id -> BadRequest
+            var a1 = new activity();
+
+            a1.id = 2;
+            a1.startDate = DateTimeOffset.Now;
+            a1.endDate = DateTimeOffset.Now;
+            a1.description = "test";
+            a1.activtyTypeId = 1;
+            a1.projectId = 1;
+
+            var result1 = ctrl.Update(1, a1);
+
+            Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
+
         }
     }
 }
