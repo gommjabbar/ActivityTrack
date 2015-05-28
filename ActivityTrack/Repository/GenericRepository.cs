@@ -56,6 +56,7 @@ namespace ActivityTrack.Repository
         public virtual void Insert(TEntity entity)
         {
             DbSet.Add(entity);
+            Context.SaveChanges();
         }
 
         public virtual void Delete(object id)
@@ -71,12 +72,14 @@ namespace ActivityTrack.Repository
                 DbSet.Attach(entityToDelete);
             }
             DbSet.Remove(entityToDelete);
+            Context.SaveChanges();
         }
 
         public virtual void Update(TEntity entityToUpdate)
         {
             DbSet.Attach(entityToUpdate);
             Context.Entry(entityToUpdate).State = EntityState.Modified;
+            Context.SaveChanges();
         }
     }
 }

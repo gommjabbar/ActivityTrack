@@ -27,7 +27,7 @@ namespace ActivityTrack.IntegrationTests
             a1.startDate = DateTimeOffset.Now;
             a1.endDate = DateTimeOffset.Now;
             a1.description = "test";
-            a1.activtyTypeId = 1;
+            a1.typeId = 1;
             a1.projectId = 1;
 
             var result1 = ctrl.Add(a1);
@@ -40,7 +40,7 @@ namespace ActivityTrack.IntegrationTests
 
             a2.startDate = DateTimeOffset.Now;
             a2.description = "test";
-            a2.activtyTypeId = 1;
+            a2.typeId = 1;
             a2.projectId = 1;
 
             var result2 = ctrl.Add(a2);
@@ -66,7 +66,7 @@ namespace ActivityTrack.IntegrationTests
             a1.startDate = DateTimeOffset.Now;
             a1.endDate = DateTimeOffset.Now;
             a1.description = "test";
-            a1.activtyTypeId = 1;
+            a1.typeId = 1;
 
             var result1 = ctrl.Add(a1);
 
@@ -195,7 +195,7 @@ namespace ActivityTrack.IntegrationTests
             a1.startDate = DateTimeOffset.Now;
             a1.endDate = DateTimeOffset.Now;
             a1.description = "test";
-            a1.activtyTypeId = 1;
+            a1.typeId = 1;
             a1.projectId = 1;
 
             var result1 = ctrl.Update(1, a1);
@@ -219,7 +219,7 @@ namespace ActivityTrack.IntegrationTests
             a1.startDate = DateTimeOffset.Now;
             a1.endDate = DateTimeOffset.Now;
             a1.description = "test";
-            a1.activtyTypeId = 1;
+            a1.typeId = 1;
             a1.projectId = 1;
 
             var result1 = ctrl.Update(1, a1);

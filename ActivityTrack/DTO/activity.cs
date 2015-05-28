@@ -8,8 +8,8 @@ namespace ActivityTrack.DTO
         public DateTimeOffset startDate { get; set; }
         public DateTimeOffset? endDate { get; set; }
         public string description { get; set; }
-        public int activtyTypeId { get; set; }
-        public activityType qctivityType { get; set; }
+        public int typeId { get; set; }
+        public activityType type { get; set; }
         public int projectId { get; set; }
         public project project { get; set; }
     }

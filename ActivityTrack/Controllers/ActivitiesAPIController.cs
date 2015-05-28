@@ -99,9 +99,6 @@ namespace ActivityTrack.Controllers
                 return BadRequest();
             }
 
-            
-            _ar.Insert(activityEO);
-
             _ar.Update(activityEO);
             
             return Json(activityDTO);
