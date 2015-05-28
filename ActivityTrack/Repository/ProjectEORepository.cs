@@ -11,7 +11,6 @@ namespace ActivityTrack.Repository
         public ProjectEORepository(ApplicationDbContext context)
         {
             Context = context;
-            DbSet = context.Set<ProjectEO>();
         }
     }
 }

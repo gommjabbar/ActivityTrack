@@ -36,7 +36,9 @@ namespace ActivityTrack
                 .ForMember(x => x.endDate, opt => opt.MapFrom(src => src.EndDate))
                 .ForMember(x => x.typeId, opt => opt.MapFrom(src => src.TypeId))
                 .ForMember(x => x.projectId, opt => opt.MapFrom(src => src.ProjectId))
-                .ForMember(x => x.description, opt => opt.MapFrom(src => src.Description));
+                .ForMember(x => x.description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(x => x.type, opt => opt.MapFrom(src => src.ActivityType))
+                .ForMember(x => x.project, opt => opt.MapFrom(src => src.Project));
 
             Mapper.CreateMap<activity, ActivityEO>()
                 .ForMember(x => x.Id, opt => opt.MapFrom(src => src.id))
@@ -44,7 +46,9 @@ namespace ActivityTrack
                 .ForMember(x => x.EndDate, opt => opt.MapFrom(src => src.endDate))
                 .ForMember(x => x.ProjectId, opt => opt.MapFrom(src => src.projectId))
                 .ForMember(x => x.TypeId, opt => opt.MapFrom(src => src.typeId))
-                .ForMember(x => x.Description, opt => opt.MapFrom(src => src.description));
+                .ForMember(x => x.Description, opt => opt.MapFrom(src => src.description))
+                .ForMember(x => x.ActivityType, opt => opt.MapFrom(src => src.type))
+                .ForMember(x => x.Project, opt => opt.MapFrom(src => src.project));
         }
     }
 }

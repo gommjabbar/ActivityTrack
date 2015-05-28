@@ -3,25 +3,24 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using ActivityTrack.DTO;
 using ActivityTrack.Models;
+using AutoMapper;
 
 namespace ActivityTrack.Repository
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         internal ApplicationDbContext  Context;
-        internal DbSet<TEntity> DbSet;
 
         public GenericRepository(ApplicationDbContext context)
         {
             Context = context;
-            DbSet = context.Set<TEntity>();
         }
 
         public GenericRepository()
         {
             Context = new ApplicationDbContext();
-            DbSet = Context.Set<TEntity>();
         }
 
         public virtual IEnumerable<TEntity> Get(
@@ -29,7 +28,7 @@ namespace ActivityTrack.Repository
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "")
         {
-            IQueryable<TEntity> query = DbSet;
+            IQueryable<TEntity> query = Context.Set<TEntity>();
 
             if (filter != null)
             {
@@ -50,18 +49,18 @@ namespace ActivityTrack.Repository
 
         public virtual TEntity GetById(object id)
         {
-            return DbSet.Find(id);
+            return Context.Set<TEntity>().Find(id);
         }
 
         public virtual void Insert(TEntity entity)
         {
-            DbSet.Add(entity);
+            Context.Set<TEntity>().Add(entity);
             Context.SaveChanges();
         }
 
         public virtual void Delete(object id)
         {
-            TEntity entityToDelete = DbSet.Find(id);
+            TEntity entityToDelete = Context.Set<TEntity>().Find(id);
             Delete(entityToDelete);
         }
 
@@ -69,15 +68,15 @@ namespace ActivityTrack.Repository
         {
             if (Context.Entry(entityToDelete).State == EntityState.Detached)
             {
-                DbSet.Attach(entityToDelete);
+                Context.Set<TEntity>().Attach(entityToDelete);
             }
-            DbSet.Remove(entityToDelete);
+            Context.Set<TEntity>().Remove(entityToDelete);
             Context.SaveChanges();
         }
 
         public virtual void Update(TEntity entityToUpdate)
         {
-            DbSet.Attach(entityToUpdate);
+            Context.Set<TEntity>().Attach(entityToUpdate);
             Context.Entry(entityToUpdate).State = EntityState.Modified;
             Context.SaveChanges();
         }
