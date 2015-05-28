@@ -8,14 +8,14 @@ namespace ActivityTrack.Models
     {
         public int Id { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
 
-        public DateTime? EndDate { get; set; }
+        public DateTimeOffset? EndDate { get; set; }
 
-        public string ActivityDescription { get; set; }
+        public string Description { get; set; }
 
         [ForeignKey("ActivityType")]
-        public int ActivtyTypeId { get; set; }
+        public int TypeId { get; set; }
         public virtual ActivityTypeEO ActivityType { get; set; }
 
         [ForeignKey("Project")]

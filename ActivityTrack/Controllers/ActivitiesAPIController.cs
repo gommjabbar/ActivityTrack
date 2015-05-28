@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ActivityTrack.Models;
 using System.Web.Http;
@@ -11,6 +12,17 @@ namespace ActivityTrack.Controllers
     public class ActivitiesAPIController : ApiController
     {
         private IActivityEORepository _ar = new ActivityEORepository();
+
+        [HttpGet]
+        [Route("api/activities")]
+        public IHttpActionResult GetAll()
+        {
+            var activitiesEO = _ar.Get();
+
+            List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
+
+            return Json(activitiesDTO);
+        }
 
         [HttpGet]
         [Route("api/projects/{projectId}/activities")]

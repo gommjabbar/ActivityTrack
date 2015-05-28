@@ -21,6 +21,7 @@ namespace ActivityTrack.Repository
         public GenericRepository()
         {
             Context = new ApplicationDbContext();
+            DbSet = Context.Set<TEntity>();
         }
 
         public virtual IEnumerable<TEntity> Get(

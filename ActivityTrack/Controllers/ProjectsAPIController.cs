@@ -16,7 +16,9 @@ namespace ActivityTrack.Controllers
         [Route("api/projects")]
         public IHttpActionResult GetAll()
         {
+            Mapper.CreateMap<project, ProjectEO>();
             var allProjectsEO = _pr.Get();
+
             List<project> allProjectsDTO = allProjectsEO.Select(Mapper.Map<project>).ToList();
 
             return Json(allProjectsDTO);

@@ -204,6 +204,10 @@
     <Compile Include="Migrations\201505280953563_UpdatedEOs.Designer.cs">
       <DependentUpon>201505280953563_UpdatedEOs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505281719033_minimalFixing.cs" />
+    <Compile Include="Migrations\201505281719033_minimalFixing.Designer.cs">
+      <DependentUpon>201505281719033_minimalFixing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityEO.cs" />
@@ -1138,11 +1142,6 @@
     <Content Include="Views\Activity\Details.cshtml" />
     <Content Include="Views\Activity\Edit.cshtml" />
     <Content Include="Views\Activity\Index.cshtml" />
-    <Content Include="Views\ActivityType\Create.cshtml" />
-    <Content Include="Views\ActivityType\Delete.cshtml" />
-    <Content Include="Views\ActivityType\Details.cshtml" />
-    <Content Include="Views\ActivityType\Edit.cshtml" />
-    <Content Include="Views\ActivityType\Index.cshtml" />
     <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup />
@@ -1171,6 +1170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505280953563_UpdatedEOs.resx">
       <DependentUpon>201505280953563_UpdatedEOs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505281719033_minimalFixing.resx">
+      <DependentUpon>201505281719033_minimalFixing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
