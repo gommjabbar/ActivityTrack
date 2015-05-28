@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ActivityTrack.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,8 @@ using System.Web.Mvc;
 
 namespace ActivityTrack.Models
 {
-    public class Activity
+    [Table("Activities")]
+    public class ActivityEO
     {
         public int Id { get; set; }
 
@@ -32,5 +34,13 @@ namespace ActivityTrack.Models
         public virtual Project Project { get; set; }
         
         public IEnumerable<SelectListItem> TypesList { get; set; }
+
+        public ActivityEO()
+        {
+
+        }
+        public ActivityEO(activity a)
+        {            
+        }
     }
 }

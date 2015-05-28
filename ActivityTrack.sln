@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityTrack", "ActivityTr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityTrack.Business", "ActivityTrack.Business\ActivityTrack.Business.csproj", "{A4537504-9C0A-4EFD-8FC3-D1174595423E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivityTrack.IntegrationTests", "ActivityTrack.IntegrationTests\ActivityTrack.IntegrationTests.csproj", "{BB9A9478-1EBD-4DD9-AE4A-A05F224DEE25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A4537504-9C0A-4EFD-8FC3-D1174595423E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4537504-9C0A-4EFD-8FC3-D1174595423E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4537504-9C0A-4EFD-8FC3-D1174595423E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB9A9478-1EBD-4DD9-AE4A-A05F224DEE25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB9A9478-1EBD-4DD9-AE4A-A05F224DEE25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB9A9478-1EBD-4DD9-AE4A-A05F224DEE25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB9A9478-1EBD-4DD9-AE4A-A05F224DEE25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

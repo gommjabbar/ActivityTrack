@@ -10,6 +10,6 @@ namespace ActivityTrack.Models
         public int Id { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
-        public virtual ICollection<Activity> Activities { get; set; }
+        public virtual ICollection<ActivityEO> Activities { get; set; }
     }
 }

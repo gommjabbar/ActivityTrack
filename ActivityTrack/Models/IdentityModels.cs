@@ -30,7 +30,7 @@ namespace ActivityTrack.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<ActivityTrack.Models.Activity> Activities { get; set; }
+        public System.Data.Entity.DbSet<ActivityTrack.Models.ActivityEO> Activities { get; set; }
 
         public System.Data.Entity.DbSet<ActivityTrack.Models.ActivityType> ActivityTypes { get; set; }
 

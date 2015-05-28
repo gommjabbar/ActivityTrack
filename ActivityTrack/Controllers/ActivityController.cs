@@ -27,7 +27,7 @@ namespace ActivityTrack.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Activity activity = db.Activities.Find(id);
+            ActivityEO activity = db.Activities.Find(id);
             if (activity == null)
             {
                 return HttpNotFound();
@@ -40,7 +40,7 @@ namespace ActivityTrack.Controllers
         {
             var types = db.ActivityTypes;
             var selectList = types.Select(thing => new SelectListItem {Text = thing.Type, Selected = false, Value = thing.Id.ToString()}).ToList();
-            var activity = new Activity();
+            var activity = new ActivityEO();
             activity.TypesList = selectList;
             activity.StartDate = DateTime.Today;
             return View(activity);
@@ -51,7 +51,7 @@ namespace ActivityTrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,StartDate,EndDate,ActivityDescription,ActivtyTypeId, ProjectId")] Activity activity)
+        public ActionResult Create([Bind(Include = "Id,StartDate,EndDate,ActivityDescription,ActivtyTypeId, ProjectId")] ActivityEO activity)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace ActivityTrack.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Activity activity = db.Activities.Find(id);
+            ActivityEO activity = db.Activities.Find(id);
             if (activity == null)
             {
                 return HttpNotFound();
@@ -83,7 +83,7 @@ namespace ActivityTrack.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,StartDate,EndDate,ActivityDescription,ActivtyTypeId")] Activity activity)
+        public ActionResult Edit([Bind(Include = "Id,StartDate,EndDate,ActivityDescription,ActivtyTypeId")] ActivityEO activity)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +101,7 @@ namespace ActivityTrack.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Activity activity = db.Activities.Find(id);
+            ActivityEO activity = db.Activities.Find(id);
             if (activity == null)
             {
                 return HttpNotFound();
@@ -114,7 +114,7 @@ namespace ActivityTrack.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Activity activity = db.Activities.Find(id);
+            ActivityEO activity = db.Activities.Find(id);
             db.Activities.Remove(activity);
             db.SaveChanges();
             return RedirectToAction("Index");

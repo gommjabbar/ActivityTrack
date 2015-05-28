@@ -4,6 +4,8 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web.Http;
 using ActivityTrack.Repository;
+using ActivityTrack.DTO;
+using AutoMapper;
 
 namespace ActivityTrack.Controllers
 {
@@ -35,19 +37,21 @@ namespace ActivityTrack.Controllers
 
         [HttpPost]
         [Route("api/activities")]
-        public IHttpActionResult Add(Activity activity)
+        public IHttpActionResult Add(activity activity)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                 return BadRequest(ModelState);
             }
-            _ar.Insert(activity);
+            //var a = new ActivityEO();
+            //a.ActivityDescription = activity.description;
+            //_ar.Insert(activity);
             return Json(activity);
         }
 
         [HttpPut]
         [Route("api/activities")]
-        public IHttpActionResult Update(int id, Activity activity)
+        public IHttpActionResult Update(int id, ActivityEO activity)
         {
             if (!ModelState.IsValid)
             {

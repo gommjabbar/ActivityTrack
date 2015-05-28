@@ -16,7 +16,10 @@
              ]
              
              $scope.activity = {
-                 project: $scope.allProjects[0]
+                 project: $scope.allProjects[0],
+                 startDate: new Date(),
+                 endDate: undefined,
+                 description: "test"
              }
 
              $scope.saveProject = function () {
@@ -33,9 +36,16 @@
                  {
                      url: '/api/activities',
                      type: 'post',
-                     data: JSON.stringify($scope.activity)                     
+                     data: $scope.activity //angular.toJson($scope.activity)
+                         //{
+                         //    startDate: new Date(),
+                         //    endDate: new Date(),
+                         //    description: 'test',
+                         //    id: 1,
+                         //    project : { id: 1, name: 'test'}
+                         //}
                  }).done(function (data) {
-                     $scope.activity.push(data);
+                     //$scope.activity.push(data);
                      $scope.$apply();
                  })
              }

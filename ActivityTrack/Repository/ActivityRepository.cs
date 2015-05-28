@@ -5,7 +5,7 @@ using ActivityTrack.Models;
 
 namespace ActivityTrack.Repository
 {
-    public class ActivityRepository: GenericRepository<Activity>, IActivityRepository
+    public class ActivityRepository: GenericRepository<ActivityEO>, IActivityRepository
     {
         public ActivityRepository()
         {
@@ -14,10 +14,10 @@ namespace ActivityTrack.Repository
         public ActivityRepository(ApplicationDbContext context)
         {
             this.context = context;
-            this.dbSet = context.Set<Activity>();
+            this.dbSet = context.Set<ActivityEO>();
         }
 
-        public List<Activity> GetFromTo(int offset, int length)
+        public List<ActivityEO> GetFromTo(int offset, int length)
         {
             // Return a list of activities that have id between "offset" and "offset"+"length"
             // Shortly, extracts first "length" activities starting from "offset"
@@ -28,7 +28,7 @@ namespace ActivityTrack.Repository
             return result;
         }
 
-        public List<Activity> ProjectActivities(int projectId)
+        public List<ActivityEO> ProjectActivities(int projectId)
         {
             //Return a list of activities of specific project with id projectId
 
