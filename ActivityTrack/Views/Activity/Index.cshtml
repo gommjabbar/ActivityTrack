@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ActivityTrack.Models.Activity>
+﻿@model IEnumerable<ActivityTrack.Models.ActivityEO>
 
 @{
     ViewBag.Title = "Index";
@@ -18,10 +18,10 @@
             @Html.DisplayNameFor(model => model.EndDate)
         </th>
         <th width="40%">
-            @Html.DisplayNameFor(model => model.ActivityDescription)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th width="20%">
-            @Html.DisplayNameFor(model => model.ActivtyTypeId)
+            @Html.DisplayNameFor(model => model.TypeId)
         </th>
         <th width="10%">
             @Html.DisplayNameFor(model => model.ProjectId)
@@ -38,10 +38,10 @@
             @Html.DisplayFor(modelItem => item.EndDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ActivityDescription)
+            @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ActivtyTypeId)
+            @Html.DisplayFor(modelItem => item.TypeId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ProjectId)

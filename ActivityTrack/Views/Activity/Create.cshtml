@@ -29,7 +29,7 @@
         </div>
     
         <div class="form-group">
-            @Html.LabelFor(model => model.ActivityDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">                
                 <input type="text" ng-model="activity.description" style="width: 160px;"  />
             </div>
@@ -51,8 +51,6 @@
                 </div>                
             </div>
 
-
-
         @*<div ng-controller="myCtrl">
 
             <div style="float:left;">
@@ -64,7 +62,6 @@
             </div>
 
         </div>*@
-
 
     <div class="form-group">
             <div class="col-md-offset-2 col-md-10">           
@@ -83,7 +80,6 @@
 
 <script type="text/javascript">
 
-   
     //var myApp = angular.module('myApp', []);
 
     //myApp.directive('fileModel', ['$parse', function ($parse) {
@@ -127,91 +123,6 @@
     //    };
 
     //}]);
-
-
-    @*var app = angular.module("activityTrack");
-
-    app.service("projectService", function () {
-        return {
-            addNewProject: function (project) {
-                return $.ajax(
-                {
-                    url: '/Projects/Add',
-                    type: 'post',
-                    data: project
-                });
-            }
-        }
-    });
-
-    app.controller("newActivityController", //['projectService',
-
-         function ($scope, projectService) {
-             //function ($scope, $http) {
-             $scope.newProjectButtonText = 'Add';
-             $scope.showNewProject = false;
-             $scope.newProject = {
-                 id: -1,
-                 name: 'Enter project'
-             }
-             $scope.allProjects = [
-                 { id: 1, name: "ActivityTrack" },
-                 { id: 2, name: "Other" },
-                 { id: 3, name: "NextOne" }
-             ]
-             $scope.activity = @Html.Raw(Json.Encode(Model))
-             $scope.activity = {
-                 project: $scope.allProjects[0]
-             }
-
-             $scope.saveProject = function () {
-                 var data = JSON.stringify($scope.newProject);
-                 $.ajax(
-                 {
-                     url: '/api/projects/add',
-                     type: 'post',
-                     data: { Name: 'a', Id: 1 }
-                 }).done(function (data) {
-                     $scope.allProjects.push(data);
-                     $scope.$apply();
-                 })
-             }
-
-             $scope.addActivity = function () {
-                 //var data = { startdate: activity.startdate, enddate: activity.enddate, description: activity.description, project: activity.project }
-                 $.ajax(
-                 {
-                     url: '/api/activities/Add',
-                     type: 'post',
-                     data: {
-                         startdate: 'asdas',
-                         enddate: 'asdas',
-                         description: 'sdfsfd',
-                         project: 'asdas',
-                         //startdate: activity.startdate,
-                         //enddate: activity.enddate,
-                         //description: activity.description,
-                         //project: activity.project
-                     }
-                 }).done(function (data) {
-                     $scope.activity.push(data);
-                     $scope.$apply();
-                 })
-             }
-
-
-             $scope.showHide = function () {
-                 $scope.showNewProject = !$scope.showNewProject;
-                 if ($scope.showNewProject) {
-                     $scope.newProjectButtonText = 'Cancel';
-                 }
-                 else {
-                     $scope.newProjectButtonText = 'Add';
-                 }
-             }
-             // }]);
-         });*@
-
   
     $(function () {
         $('#datepicker').datetimepicker();

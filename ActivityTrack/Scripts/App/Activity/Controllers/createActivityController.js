@@ -36,16 +36,8 @@
                  {
                      url: '/api/activities',
                      type: 'post',
-                     data: $scope.activity //angular.toJson($scope.activity)
-                         //{
-                         //    startDate: new Date(),
-                         //    endDate: new Date(),
-                         //    description: 'test',
-                         //    id: 1,
-                         //    project : { id: 1, name: 'test'}
-                         //}
+                     data: $scope.activity
                  }).done(function (data) {
-                     //$scope.activity.push(data);
                      $scope.$apply();
                  })
              }
