@@ -195,6 +195,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivitiesAPIController.cs" />
+    <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectsAPIController.cs" />
@@ -1198,12 +1199,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Scripts\version.json" />
     <Content Include="Views\Activity\Create.cshtml" />
     <Content Include="Views\Activity\Delete.cshtml" />
     <Content Include="Views\Activity\Details.cshtml" />
     <Content Include="Views\Activity\Edit.cshtml" />
     <Content Include="Views\Activity\Index.cshtml" />
-    <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

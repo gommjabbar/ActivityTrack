@@ -6,69 +6,76 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal" ng-controller="newActivityController">
         <h4 id="h4">Activity</h4>
 
         <hr />
-         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="date"  ng-model="activity.startDate" style="width: 160px" />        
+                <input type="text" id="datepicker"ng-model="activity.startDate" style="width: 160px" />
             </div>
         </div>
-       
+
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">                
+            <div class="col-md-10">
                 <input type="text" id="datepicker1" ng-model="activity.endDate" style="width: 160px" />
             </div>
         </div>
-    
+
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">                
-                <input type="text" ng-model="activity.description" style="width: 160px;"  />
+            <div class="col-md-10">
+                <input type="text" ng-model="activity.description" style="width: 160px;" />
             </div>
         </div>
-     
+
         <div class="form-group">
             @Html.LabelFor(model => model.ProjectId, htmlAttributes: new { @class = "control-label col-md-2" })
-            @*<div class="col-md-10">
-                @Html.EditorFor(model => model.ProjectId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProjectId, "", new { @class = "text-danger" })
-            </div>*@
+            <div class="col-md-10">
+                    <input type"text" ng-model="activity.projectId">
+                </div>
+            </div>
 
-            <select ng-model="activity.project"
-                    ng-options="project.name for project in allProjects track by project.id" style="width: 160px; height: 25px; margin-left: 15px;"></select>            
-            <input class="btn btn-default" type="button" id="btnShowNewProject" value="{{newProjectButtonText}}" ng-click="showHide()" /> 
-                <div ng-show="showNewProject"> 
-                    <input type="text" ng-model="newProject.name" style="width: 160px; margin-left:210px"/>
-                    <input class="btn btn-default" type="button" id="btnSaveNewProject" value="Save" ng-click="saveProject()" />
-                </div>                
+         <div class="form-group">
+                @Html.LabelFor(model => model.TypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type"text" ng-model="activity.typeId">
+                </div>
+             </div>
+
+                @* <select ng-model="activity.project"
+                    ng-options="project.name for project in allProjects track by project.id" style="width: 160px; height: 25px; margin-left: 15px;"></select>
+            <input class="btn btn-default" type="button" id="btnShowNewProject" value="{{newProjectButtonText}}" ng-click="showHide()" />
+            <div ng-show="showNewProject">
+                <input type="text" ng-model="newProject.name" style="width: 160px; margin-left:210px" />
+                <input class="btn btn-default" type="button" id="btnSaveNewProject" value="Save" ng-click="saveProject()" />
+            </div>
+                *@
             </div>
 
         @*<div ng-controller="myCtrl">
 
-            <div style="float:left;">
-                <label style="margin-left:90px; margin-right:30px" for="fileToUpload">Upload File </label>
-            </div>
-            <div style="margin-left: auto  ">
-                <input type="file" file-model="myFile" />
-                <input class="btn btn-default" type="button" ng-click="uploadFile()" value="Upload" />
-            </div>
+                <div style="float:left;">
+                    <label style="margin-left:90px; margin-right:30px" for="fileToUpload">Upload File </label>
+                </div>
+                <div style="margin-left: auto  ">
+                    <input type="file" file-model="myFile" />
+                    <input class="btn btn-default" type="button" ng-click="uploadFile()" value="Upload" />
+                </div>
 
-        </div>*@
+            </div>*@
 
-    <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">           
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
                 <input type="button" class="btn btn-default" value="Create" ng-click="addActivity()" />
             </div>
         </div>
-    </div>
 }
 
 <div>
@@ -78,7 +85,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
     //var myApp = angular.module('myApp', []);
 
@@ -123,7 +130,7 @@
     //    };
 
     //}]);
-  
+
     $(function () {
         $('#datepicker').datetimepicker();
     });
@@ -131,7 +138,7 @@
     $(function () {
         $('#datepicker1').datetimepicker();
     });
-    
 
-</script>
+
+    </script>
 }
