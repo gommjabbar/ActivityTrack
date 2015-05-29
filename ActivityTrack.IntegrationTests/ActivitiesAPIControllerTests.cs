@@ -18,6 +18,7 @@ namespace ActivityTrack.IntegrationTests
             //succes -> return Json(activityDTO) 
             //fail -> return BadRequest(ModelState) -> something else than succes is considered fail
 
+            AutoMapperConfig.Configure();
             var ctrl = new ActivitiesAPIController();
 
             //all fields completed
@@ -58,7 +59,7 @@ namespace ActivityTrack.IntegrationTests
             //fail -> return BadRequest(ModelState) -> something else than succes is considered fail
 
             var ctrl = new ActivitiesAPIController();
-
+            AutoMapperConfig.Configure();
 
             //projectId has no value
             var a1 = new activity();
@@ -106,6 +107,7 @@ namespace ActivityTrack.IntegrationTests
         {
             //activity is found in db, so it has to be different from BadResult
             var ctrl = new ActivitiesAPIController();
+            AutoMapperConfig.Configure();
 
             var result1 = ctrl.GetActivity(1);
             Assert.IsNotInstanceOfType(result1, typeof(BadRequestResult));
@@ -119,6 +121,7 @@ namespace ActivityTrack.IntegrationTests
         {
             //activity is not found in db, so it has to be BadResult
             var ctrl = new ActivitiesAPIController();
+            AutoMapperConfig.Configure();
 
             var result1 = ctrl.GetActivity(15000);
             Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
@@ -132,6 +135,7 @@ namespace ActivityTrack.IntegrationTests
         {
             //the project has some activities, si it has to be different from BadRequest
             var ctrl = new ActivitiesAPIController();
+            AutoMapperConfig.Configure();
 
             var result1 = ctrl.GetActivitiesOfProject(1);
             Assert.IsNotInstanceOfType(result1, typeof(BadRequestResult));
@@ -145,6 +149,8 @@ namespace ActivityTrack.IntegrationTests
         {
             //the project does not have activities, so it has to be BadRequest
             var ctrl = new ActivitiesAPIController();
+            AutoMapperConfig.Configure();
+
 
             var result1 = ctrl.GetActivitiesOfProject(21000);
             Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
@@ -158,6 +164,8 @@ namespace ActivityTrack.IntegrationTests
         {
             //there are some activities between offset and offset+length, so it has to be different from BadRequest
             var ctrl = new ActivitiesAPIController();
+            AutoMapperConfig.Configure();
+
 
             var result1 = ctrl.GetFromTo(1,2);
             Assert.IsNotInstanceOfType(result1, typeof(BadRequestResult));
@@ -171,6 +179,8 @@ namespace ActivityTrack.IntegrationTests
         {
             //there are not activities between offset and offset+length, so it has to be BadRequest
             var ctrl = new ActivitiesAPIController();
+            AutoMapperConfig.Configure();
+
 
             var result1 = ctrl.GetFromTo(10000, 2);
             Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
@@ -187,6 +197,8 @@ namespace ActivityTrack.IntegrationTests
             //fail -> return BadRequest(ModelState) -> something else than succes is considered fail
 
             var ctrl = new ActivitiesAPIController();
+            AutoMapperConfig.Configure();
+
 
             //all fields completed and id coresponds with a1.id
             var a1 = new activity();
@@ -211,6 +223,8 @@ namespace ActivityTrack.IntegrationTests
 
 
             var ctrl = new ActivitiesAPIController();
+            AutoMapperConfig.Configure();
+
 
             //all fields completed and id does not corespond with a1.id -> BadRequest
             var a1 = new activity();
