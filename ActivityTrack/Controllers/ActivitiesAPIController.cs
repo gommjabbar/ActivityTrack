@@ -30,11 +30,6 @@ namespace ActivityTrack.Controllers
         {
             var activitiesEO = _ar.ProjectActivities(projectId);
 
-            if (activitiesEO == null)
-            {
-                return BadRequest();
-            }
-
             List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
 
             return Json(activitiesDTO);
@@ -45,11 +40,6 @@ namespace ActivityTrack.Controllers
         public IHttpActionResult GetActivity(int activityId)
         {
             var activityEO = _ar.GetById(activityId);
-
-            if (activityEO == null)
-            {
-                return BadRequest();
-            }
 
             var activityDTO = Mapper.Map<activity>(activityEO);
 

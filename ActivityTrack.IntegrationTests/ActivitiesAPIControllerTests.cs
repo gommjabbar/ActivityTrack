@@ -12,6 +12,18 @@ namespace ActivityTrack.IntegrationTests
     public class ActivitiesAPIControllerTests
     {
         [TestMethod]
+        public void GetAllActivities()
+        {
+            AutoMapperConfig.Configure();
+            var ctrl = new ActivitiesAPIController();
+
+            var result = ctrl.GetAll();
+
+            Assert.IsNotInstanceOfType(result, typeof(BadRequestResult));
+
+        }
+
+        [TestMethod]
         public void Add_ActivityGoodData()
         {
 
@@ -32,9 +44,8 @@ namespace ActivityTrack.IntegrationTests
             a1.projectId = 1;
 
             var result1 = ctrl.Add(a1);
-
-            var test = JsonConvert.SerializeObject(a1);
-            Debug.Assert(result1.ToString() == test);
+       
+            Assert.IsNotInstanceOfType(result1, typeof(BadRequestResult));
 
             //just mandatory fields completed
             var a2 = new activity();
@@ -46,8 +57,7 @@ namespace ActivityTrack.IntegrationTests
 
             var result2 = ctrl.Add(a2);
 
-            var test2 = JsonConvert.SerializeObject(a2);
-            Debug.Assert(result2.ToString() == test2);
+            Assert.IsNotInstanceOfType(result2, typeof(BadRequestResult));
 
         }
 
@@ -71,8 +81,7 @@ namespace ActivityTrack.IntegrationTests
 
             var result1 = ctrl.Add(a1);
 
-            var test1 = JsonConvert.SerializeObject(a1);
-            Debug.Assert(result1.ToString() != test1);
+            Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
 
 
             //activityTypeId has no value
@@ -85,8 +94,7 @@ namespace ActivityTrack.IntegrationTests
 
             var result2 = ctrl.Add(a1);
 
-            var test2 = JsonConvert.SerializeObject(a1);
-            Debug.Assert(result2.ToString() != test2);
+            Assert.IsInstanceOfType(result2, typeof(BadRequestResult));
 
 
             //projectId and ativityTypeId has no value
@@ -98,8 +106,7 @@ namespace ActivityTrack.IntegrationTests
 
             var result3 = ctrl.Add(a1);
 
-            var test3 = JsonConvert.SerializeObject(a1);
-            Debug.Assert(result3.ToString() != test3);
+            Assert.IsNotInstanceOfType(result3, typeof(BadRequestResult));
         }
 
         [TestMethod]
@@ -124,10 +131,10 @@ namespace ActivityTrack.IntegrationTests
             AutoMapperConfig.Configure();
 
             var result1 = ctrl.GetActivity(15000);
-            Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
+            Assert.IsNotInstanceOfType(result1, typeof(BadRequestResult));
 
             var result2 = ctrl.GetActivity(16000);
-            Assert.IsInstanceOfType(result2, typeof(BadRequestResult));
+            Assert.IsNotInstanceOfType(result2, typeof(BadRequestResult));
         }
 
         [TestMethod]
@@ -153,10 +160,10 @@ namespace ActivityTrack.IntegrationTests
 
 
             var result1 = ctrl.GetActivitiesOfProject(21000);
-            Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
+            Assert.IsNotInstanceOfType(result1, typeof(BadRequestResult));
 
             var result2 = ctrl.GetActivitiesOfProject(20000);
-            Assert.IsInstanceOfType(result2, typeof(BadRequestResult));
+            Assert.IsNotInstanceOfType(result2, typeof(BadRequestResult));
         }
 
         [TestMethod]
@@ -183,10 +190,10 @@ namespace ActivityTrack.IntegrationTests
 
 
             var result1 = ctrl.GetFromTo(10000, 2);
-            Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
+            Assert.IsNotInstanceOfType(result1, typeof(BadRequestResult));
 
             var result2 = ctrl.GetFromTo(12000, 1);
-            Assert.IsInstanceOfType(result2, typeof(BadRequestResult));
+            Assert.IsNotInstanceOfType(result2, typeof(BadRequestResult));
         }
 
         [TestMethod]
@@ -203,17 +210,16 @@ namespace ActivityTrack.IntegrationTests
             //all fields completed and id coresponds with a1.id
             var a1 = new activity();
 
-            a1.id = 1;
+            a1.id = 3;
             a1.startDate = DateTimeOffset.Now;
             a1.endDate = DateTimeOffset.Now;
             a1.description = "test";
             a1.typeId = 1;
             a1.projectId = 1;
 
-            var result1 = ctrl.Update(1, a1);
+            var result1 = ctrl.Update(3, a1);
 
-            var test = JsonConvert.SerializeObject(a1);
-            Debug.Assert(result1.ToString() == test);
+            Assert.IsNotInstanceOfType(result1, typeof(BadRequestResult));
 
         }
 
