@@ -9,7 +9,15 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<body ng-controller="displayActivities">
+
+<div class="container" ng-controller="newActivityController">
+    <form>
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Filter by project..." ng-model="search.Type">
+            </div>
+        </div>
+    </form>
     <table st-table="Activities" class="table table-striped">
         <tr>
             <th> Type  </th>
@@ -19,14 +27,17 @@
             <th> Description </th>
             <th></th>
         </tr>
-
-        <tr ng-repeat="row in Activities">
-            <td>{{row.ActivityType.Type}}</td>
-            <td>{{row.Project.Name}}</td>
-            <td>{{row.StartDate}}</td>
-            <td>{{row.EndDate}}</td>
-            <td>{{row.Description}}</td>
-        </tr>
-
+        <tbody>
+            <tr ng-repeat="activity in Activities | filter:search">
+                @*<td>{{row.ActivityType.Type}}</td>
+            <td>{{row.Project.Name}}</td>*@
+                <td>{{ activity.Type }}</td>
+                <td>{{ activity.Name }}</td>
+                <td>{{ activity.StartDate }}</td>
+                <td>{{ activity.EndDate }}</td>
+                <td>{{ activity.Description }}</td>
+            </tr>
+        </tbody>
     </table>
-</body>
+</div>
+
