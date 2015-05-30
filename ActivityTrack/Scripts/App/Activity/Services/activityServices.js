@@ -6,8 +6,16 @@
             addNewActivity: function (data) {
                 return $.ajax(
                 {
-                    url: '/activities',
+                    url: '/api/activities',
                     type: 'post',
+                    data: data
+                });
+            },
+            displayActivities: function(data){
+                return $.ajax(
+                {
+                    url: '/api/activities',
+                    type: 'get',
                     data: data
                 });
             }
