@@ -235,6 +235,7 @@
     <Compile Include="Models\ActivityTypeEO.cs" />
     <Compile Include="DTO\activity.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IdEnums\ActivityStateIds.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProjectEO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

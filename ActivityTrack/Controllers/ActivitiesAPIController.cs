@@ -73,6 +73,26 @@ namespace ActivityTrack.Controllers
             return Json(activityDTO);
         }
 
+        
+        [HttpPut]
+        [Route("api/activities/start")]
+        public IHttpActionResult StartActivity(activity activityDTO)
+        {
+            return null;
+        }
+
+        [HttpPut]
+        [Route("api/activities/pause")]
+        public IHttpActionResult StartActivity(activity activityDTO)
+        {
+            return null;
+        }
+        [HttpPut]
+        [Route("api/activities/end")]
+        public IHttpActionResult StartActivity(activity activityDTO)
+        {
+            return null;
+        }
         [HttpPut]
         [Route("api/activities")]
         public IHttpActionResult Update(int id, activity activityDTO)
