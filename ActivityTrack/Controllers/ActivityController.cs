@@ -58,7 +58,7 @@ namespace ActivityTrack.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TypeId = new SelectList(db.ActivityTypes, "Id", "Type", activityEO.TypeId);
+            ViewBag.TypeId = new SelectList(db.ActivityTypes, "Id", "Type", activityEO.ActivityTypeId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", activityEO.ProjectId);
             return View(activityEO);
         }
@@ -75,7 +75,7 @@ namespace ActivityTrack.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TypeId = new SelectList(db.ActivityTypes, "Id", "Type", activityEO.TypeId);
+            ViewBag.TypeId = new SelectList(db.ActivityTypes, "Id", "Type", activityEO.ActivityTypeId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", activityEO.ProjectId);
             return View(activityEO);
         }
@@ -93,7 +93,7 @@ namespace ActivityTrack.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TypeId = new SelectList(db.ActivityTypes, "Id", "Type", activityEO.TypeId);
+            ViewBag.TypeId = new SelectList(db.ActivityTypes, "Id", "Type", activityEO.ActivityTypeId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", activityEO.ProjectId);
             return View(activityEO);
         }

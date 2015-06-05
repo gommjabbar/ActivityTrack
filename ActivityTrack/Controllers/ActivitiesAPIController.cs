@@ -11,13 +11,13 @@ namespace ActivityTrack.Controllers
 {
     public class ActivitiesAPIController : ApiController
     {
-        private IActivityEORepository _ar = new ActivityEORepository();
+        private IActivityEORepository _activityRepository = new ActivityEORepository();
 
         [HttpGet]
         [Route("api/activities")]
         public IHttpActionResult GetAll()
         {
-            var activitiesEO = _ar.Get();
+            var activitiesEO = _activityRepository.Get();
 
             List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
 
@@ -28,7 +28,7 @@ namespace ActivityTrack.Controllers
         [Route("api/projects/{projectId}/activities")]
         public IHttpActionResult GetActivitiesOfProject(int projectId)
         {
-            var activitiesEO = _ar.ProjectActivities(projectId);
+            var activitiesEO = _activityRepository.ProjectActivities(projectId);
 
             List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
 
@@ -39,7 +39,7 @@ namespace ActivityTrack.Controllers
         [Route("api/activities/{activityId}")]
         public IHttpActionResult GetActivity(int activityId)
         {
-            var activityEO = _ar.GetById(activityId);
+            var activityEO = _activityRepository.GetById(activityId);
 
             var activityDTO = Mapper.Map<activity>(activityEO);
 
@@ -50,7 +50,7 @@ namespace ActivityTrack.Controllers
         [Route("api/activities")]
         public IHttpActionResult GetFromTo(int offset, int length)
         {
-            var activitiesEO = _ar.GetFromTo(offset, length);
+            var activitiesEO = _activityRepository.GetFromTo(offset, length);
 
             List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
 
@@ -67,8 +67,8 @@ namespace ActivityTrack.Controllers
             {
                  return BadRequest(ModelState);
             }
-
-            _ar.Insert(activityEO);
+            
+            _activityRepository.Insert(activityEO);
 
             return Json(activityDTO);
         }
@@ -89,7 +89,7 @@ namespace ActivityTrack.Controllers
                 return BadRequest();
             }
 
-            _ar.Update(activityEO);
+            _activityRepository.Update(activityEO);
             
             return Json(activityDTO);
         }

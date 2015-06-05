@@ -225,6 +225,10 @@
     <Compile Include="Migrations\201505281719033_minimalFixing.Designer.cs">
       <DependentUpon>201505281719033_minimalFixing.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506051307428_OptionalActivityType.cs" />
+    <Compile Include="Migrations\201506051307428_OptionalActivityType.Designer.cs">
+      <DependentUpon>201506051307428_OptionalActivityType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityEO.cs" />
@@ -1234,6 +1238,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505281719033_minimalFixing.resx">
       <DependentUpon>201505281719033_minimalFixing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506051307428_OptionalActivityType.resx">
+      <DependentUpon>201506051307428_OptionalActivityType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

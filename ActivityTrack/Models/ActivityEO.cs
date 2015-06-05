@@ -15,7 +15,8 @@ namespace ActivityTrack.Models
         public string Description { get; set; }
 
         [ForeignKey("ActivityType")]
-        public int TypeId { get; set; }
+        public int? ActivityTypeId { get; set; }
+
         public virtual ActivityTypeEO ActivityType { get; set; }
 
         [ForeignKey("Project")]

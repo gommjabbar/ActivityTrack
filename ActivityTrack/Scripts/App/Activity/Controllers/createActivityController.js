@@ -1,6 +1,6 @@
 ﻿(function() {
     var app = angular.module("activityTrack");
-    app.controller("newActivityController", ['$scope','activityService','projectService',
+    app.controller("createActivityController", ['$scope','activityService','projectService',
 
          function ($scope, activityService, projectService) {
              $scope.newProjectButtonText = 'Add';
@@ -17,7 +17,7 @@
              
              $scope.activity = {
                  project: $scope.allProjects[0],
-                 startDate: new Date(),
+                 startDate: new Date().toISOString(),
                  endDate: undefined,
                  description: "test"
              }
@@ -39,6 +39,8 @@
                      data: $scope.activity
                  }).done(function (data) {
                      $scope.$apply();
+                 }).error(function (error) {
+                     alert(error)
                  })
              }
 
