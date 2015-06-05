@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ActivityTrack.Models.IdEnums;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ActivityTrack.Models
 {
     [Table("Activities")]
-    public class ActivityEO
+    public class ActivityEO: BaseEntity
     {
         public int Id { get; set; }
 
@@ -13,6 +14,8 @@ namespace ActivityTrack.Models
         public DateTimeOffset? EndDate { get; set; }
 
         public string Description { get; set; }
+
+        public ActivityStateIds ActivityState { get; set; }
 
         [ForeignKey("ActivityType")]
         public int? ActivityTypeId { get; set; }

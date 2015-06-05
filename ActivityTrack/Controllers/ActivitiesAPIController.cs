@@ -63,6 +63,8 @@ namespace ActivityTrack.Controllers
         {
             var activityEO = Mapper.Map<ActivityEO>(activityDTO);
 
+            activityEO.ActivityState = Models.IdEnums.ActivityStateIds.New;
+
             if (!ModelState.IsValid)
             {
                  return BadRequest(ModelState);
@@ -78,35 +80,50 @@ namespace ActivityTrack.Controllers
         [Route("api/activities/start")]
         public IHttpActionResult StartActivity(activity activityDTO)
         {
-            return null;
+            var activityEO = Mapper.Map<ActivityEO>(activityDTO);
+
+            activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Started;
+
+            _activityRepository.Update(activityEO);
+
+            return Json(activityDTO);
         }
 
         [HttpPut]
         [Route("api/activities/pause")]
-        public IHttpActionResult StartActivity(activity activityDTO)
+        public IHttpActionResult PauseActivity(activity activityDTO)
         {
-            return null;
+            var activityEO = Mapper.Map<ActivityEO>(activityDTO);
+
+            activityEO.UpdateDate = DateTimeOffset.Now;
+
+            activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Paused;
+
+            _activityRepository.Update(activityEO);
+
+            return Json(activityDTO);
         }
         [HttpPut]
         [Route("api/activities/end")]
-        public IHttpActionResult StartActivity(activity activityDTO)
+        public IHttpActionResult EndActivity(activity activityDTO)
         {
-            return null;
+            var activityEO = Mapper.Map<ActivityEO>(activityDTO);
+
+            activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Ended;
+
+            _activityRepository.Update(activityEO);
+
+            return Json(activityDTO);
         }
         [HttpPut]
         [Route("api/activities")]
-        public IHttpActionResult Update(int id, activity activityDTO)
+        public IHttpActionResult Update(activity activityDTO)
         {
             var activityEO = Mapper.Map<ActivityEO>(activityDTO);
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (id != activityEO.Id)
-            {
-                return BadRequest();
             }
 
             _activityRepository.Update(activityEO);

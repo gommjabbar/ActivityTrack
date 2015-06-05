@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ActivityTrack.Models
 {
     [Table("ActivityTypes")]
-    public class ActivityTypeEO
+    public class ActivityTypeEO: BaseEntity
     {
         public int Id { get; set; }
         public string Type { get; set; }

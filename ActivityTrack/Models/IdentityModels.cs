@@ -3,6 +3,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Linq;
 
 namespace ActivityTrack.Models
 {
@@ -29,6 +31,28 @@ namespace ActivityTrack.Models
         {
             return new ApplicationDbContext();
         }
+
+        public override int SaveChanges()
+        {
+            DateTimeOffset saveTime = DateTimeOffset.Now;
+
+            foreach (var entry in this.ChangeTracker.Entries().Where(e => (e.State == EntityState.Added || e.State==EntityState.Modified)))
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Property("CreateDate").CurrentValue = saveTime;
+                        break;
+                    case EntityState.Modified:
+                        entry.Property("UpdateDate").CurrentValue = saveTime;
+                        break;
+                }
+            }
+
+            return base.SaveChanges();
+
+        }
+
 
         public DbSet<ActivityEO> Activities { get; set; }
 

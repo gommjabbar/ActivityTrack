@@ -205,35 +205,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201505201422252_InitialCreate.cs" />
-    <Compile Include="Migrations\201505201422252_InitialCreate.Designer.cs">
-      <DependentUpon>201505201422252_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505201600254_Inheritance.cs" />
-    <Compile Include="Migrations\201505201600254_Inheritance.Designer.cs">
-      <DependentUpon>201505201600254_Inheritance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505211214079_AddProjects.cs" />
-    <Compile Include="Migrations\201505211214079_AddProjects.Designer.cs">
-      <DependentUpon>201505211214079_AddProjects.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505280953563_UpdatedEOs.cs" />
-    <Compile Include="Migrations\201505280953563_UpdatedEOs.Designer.cs">
-      <DependentUpon>201505280953563_UpdatedEOs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505281719033_minimalFixing.cs" />
-    <Compile Include="Migrations\201505281719033_minimalFixing.Designer.cs">
-      <DependentUpon>201505281719033_minimalFixing.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506051307428_OptionalActivityType.cs" />
-    <Compile Include="Migrations\201506051307428_OptionalActivityType.Designer.cs">
-      <DependentUpon>201506051307428_OptionalActivityType.cs</DependentUpon>
+    <Compile Include="Migrations\201506051159297_First.cs" />
+    <Compile Include="Migrations\201506051159297_First.Designer.cs">
+      <DependentUpon>201506051159297_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityEO.cs" />
     <Compile Include="Models\ActivityTypeEO.cs" />
     <Compile Include="DTO\activity.cs" />
+    <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdEnums\ActivityStateIds.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -248,10 +229,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ActivityTrack.mdf" />
-    <Content Include="App_Data\ActivityTrack_log.ldf">
-      <DependentUpon>ActivityTrack.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-datetimepicker.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
@@ -1213,7 +1190,9 @@
     <Content Include="Views\Activity\Edit.cshtml" />
     <Content Include="Views\Activity\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
@@ -1225,23 +1204,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201505201422252_InitialCreate.resx">
-      <DependentUpon>201505201422252_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505201600254_Inheritance.resx">
-      <DependentUpon>201505201600254_Inheritance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505211214079_AddProjects.resx">
-      <DependentUpon>201505211214079_AddProjects.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505280953563_UpdatedEOs.resx">
-      <DependentUpon>201505280953563_UpdatedEOs.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505281719033_minimalFixing.resx">
-      <DependentUpon>201505281719033_minimalFixing.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506051307428_OptionalActivityType.resx">
-      <DependentUpon>201506051307428_OptionalActivityType.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201506051159297_First.resx">
+      <DependentUpon>201506051159297_First.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

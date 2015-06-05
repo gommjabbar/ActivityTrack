@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ActivityTrack.Models
 {
     [Table("Projects")]
-    public class ProjectEO
+    public class ProjectEO: BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

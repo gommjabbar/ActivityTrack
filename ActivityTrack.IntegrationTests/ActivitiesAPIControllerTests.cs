@@ -217,7 +217,7 @@ namespace ActivityTrack.IntegrationTests
             a1.typeId = 1;
             a1.projectId = 1;
 
-            var result1 = ctrl.Update(3, a1);
+            var result1 = ctrl.Update(a1);
 
             Assert.IsNotInstanceOfType(result1, typeof(BadRequestResult));
 
@@ -242,7 +242,7 @@ namespace ActivityTrack.IntegrationTests
             a1.typeId = 1;
             a1.projectId = 1;
 
-            var result1 = ctrl.Update(1, a1);
+            var result1 = ctrl.Update(a1);
 
             Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
 
