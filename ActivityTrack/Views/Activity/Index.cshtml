@@ -14,28 +14,39 @@
     <form>
         <div class="form-group">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Filter by project..." ng-model="search.Type">
+                <input type="text" class="form-control" placeholder="Filter by project..." ng-model="search.project.name">
             </div>
         </div>
     </form>
     <table st-table="Activities" class="table table-striped">
         <tr>
-            <th> Type  </th>
-            <th> Name  </th>
-            <th> Start Date  </th>
-            <th> EndDate  </th>
-            <th> Description </th>
-            <th></th>
+            <th><a href="" ng-click="order('project.name')"> Project</a>
+                <span class="sortorder" ng-show="predicate === 'Project'" ng-class="{reverse:reverse}"></span> </th>
+            <th>
+                <a href="" ng-click="order('startDate')"> StartDate</a>
+                <span class="sortorder" ng-show="predicate === 'Start Date'" ng-class="{reverse:reverse}"></span>
+            </th>
+            <th>
+                <a href="" ng-click="order('endDate')"> EndDate</a>
+                <span class="sortorder" ng-show="predicate === 'End Date'" ng-class="{reverse:reverse}"></span>
+            </th>
+            <th>
+                <a href="" ng-click="order('description')"> Description</a>
+                <span class="sortorder" ng-show="predicate === 'Description'" ng-class="{reverse:reverse}"></span>
+            </th>
+            <th><a href="" ng-click="order('State')"> State</a>
+            <span class="sortorder" ng-show="predicate === 'State'" ng-class="{reverse:reverse}"></span></th>
         </tr>
         <tbody>
-            <tr ng-repeat="activity in Activities | filter:search">
-                @*<td>{{row.ActivityType.Type}}</td>
-            <td>{{row.Project.Name}}</td>*@
-                <td>{{ activity.Type }}</td>
-                <td>{{ activity.Name }}</td>
-                <td>{{ activity.StartDate }}</td>
-                <td>{{ activity.EndDate }}</td>
-                <td>{{ activity.Description }}</td>
+            <tr ng-repeat="activity in Activities | filter:search | orderBy:predicate:reverse ">
+                <td>{{ activity.project.name }}</td>
+                <td>{{ activity.startDate | date: 'yyyy-MM-dd HH:mm' }}</td>
+                <td>{{ activity.endDate | date: 'yyyy-MM-dd HH:mm' }}</td>
+                <td>{{ activity.description }}</td>
+                <td>
+                    <button ng-click="">Pause</button>
+                    <button ng-click="">End</button>                  
+                </td>
             </tr>
         </tbody>
     </table>
