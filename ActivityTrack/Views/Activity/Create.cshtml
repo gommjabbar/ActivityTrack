@@ -37,7 +37,7 @@
             <label class="control-label col-md-2" for="project">Project</label>
             <div class="col-md-2">
                 <select ng-model="activity.project"
-                        ng-options="project.name for project in allProjects track by project.id"
+                        ng-options="project.name for project in Projects track by project.id"
                         style="width: 160px; height: 25px; "></select>
             </div>
             <div class="col-md-8">
@@ -51,7 +51,7 @@
                 <input type="text" ng-model="newProject.name" style="width: 160px;" />
             </div>
             <div class="col-md-8">
-                <input class="btn btn-default" type="button" id="btnSaveNewProject" value="Create Project" ng-click="saveProject()" />
+                <input class="btn btn-default" type="button" id="btnSaveNewProject" value="Create Project" ng-click="addProject()" />
             </div>
         </div>
 

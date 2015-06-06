@@ -5,28 +5,41 @@
          function ($scope, activityService, projectService) {
              $scope.newProjectButtonText = 'Add';
              $scope.showNewProject = false;
+
+             $scope.getProjects = function () {
+                 $.ajax(
+                 {
+                     url: '/api/projects',
+                     type: 'get',
+                 }).done(function (projectsList) {
+                     $scope.Projects = projectsList;
+                     $scope.$apply();
+                 })
+             }
+             $scope.getProjects();
+
              $scope.newProject = {
                  id: -1,
-                 name: 'Enter project'
+                 name: "",
              }
-             $scope.allProjects = [
-                 { id: 1, name: "ActivityTrack" },
-                 { id: 2, name: "Other" },
-                 { id: 3, name: "NextOne" }
-             ]
-             
+
              $scope.activity = {
-                 project: $scope.allProjects[0],
+                 project: $scope.Projects,
                  startDate: new Date().toISOString(),
                  endDate: undefined,
              }
 
-             $scope.saveProject = function () {
-                 var data = JSON.stringify($scope.newProject);
-                 projectService.addNewProject(data)
-                     .done(function (data) {
-                     $scope.allProjects.push(data);
+             $scope.addProject = function () {
+                 $.ajax(
+                 {
+                     url: '/api/projects',
+                     type: 'post',
+                     data: $scope.newProject
+                 }).done(function (data) {
                      $scope.$apply();
+                     $scope.getProjects();
+                 }).error(function (error) {
+                     alert(error)
                  })
              }
 
