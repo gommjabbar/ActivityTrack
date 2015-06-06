@@ -19,7 +19,6 @@
                  project: $scope.allProjects[0],
                  startDate: new Date().toISOString(),
                  endDate: undefined,
-                 description: "test"
              }
 
              $scope.saveProject = function () {

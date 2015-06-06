@@ -35,22 +35,22 @@
 
         <div class="form-group">
             <label class="control-label col-md-2" for="project">Project</label>
-            <div class="col-md-8">
+            <div class="col-md-2">
                 <select ng-model="activity.project"
                         ng-options="project.name for project in allProjects track by project.id"
                         style="width: 160px; height: 25px; "></select>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-8">
                 <input class="btn btn-default" type="button" id="btnShowNewProject" value="{{newProjectButtonText}}" ng-click="showHide()" />
             </div>
         </div>
 
         <div class="form-group" ng-show="showNewProject">
-            <label class="control-label col-md-2" for="project"></label>
-            <div class="col-md-7">
-                <input type="text" ng-model="newProject.name" style="width: 160px; margin-left:210px" />
+            <label class="control-label col-md-2" for="project">New Project</label>
+            <div class="col-md-2">
+                <input type="text" ng-model="newProject.name" style="width: 160px;" />
             </div>
-            <div class="col-md-3">
+            <div class="col-md-8">
                 <input class="btn btn-default" type="button" id="btnSaveNewProject" value="Create Project" ng-click="saveProject()" />
             </div>
         </div>
