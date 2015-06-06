@@ -32,32 +32,35 @@
                 <input type="text" ng-model="activity.description" style="width: 160px;" />
             </div>
         </div>
+        <div class="form-horizontal" ng-controller="displayProjectsController">
+            <div class="form-horizontal" ng-controller="createProjectController">
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="project">Project</label>
+                    <div class="col-md-2">
+                        <select ng-model="activity.project"
+                                ng-options="project.name for project in Projects track by project.id"
+                                style="width: 160px; height: 25px; "></select>
+                    </div>
+                    <div class="col-md-8">
+                        <input class="btn btn-default" type="button" id="btnShowNewProject" value="{{newProjectButtonText}}" ng-click="showHide()" />
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2" for="project">Project</label>
-            <div class="col-md-2">
-                <select ng-model="activity.project"
-                        ng-options="project.name for project in Projects track by project.id"
-                        style="width: 160px; height: 25px; "></select>
+                <div class="form-group" ng-show="showNewProject">
+                    <label class="control-label col-md-2" for="project">New Project</label>
+                    <div class="col-md-2">
+                        <input type="text" ng-model="newProject.name" style="width: 160px;" />
+                    </div>
+                    <div class="col-md-8">
+                        <input class="btn btn-default" type="button" id="btnSaveNewProject" value="Create Project" ng-click="addProject()" />
+                    </div>
+                </div>
             </div>
-            <div class="col-md-8">
-                <input class="btn btn-default" type="button" id="btnShowNewProject" value="{{newProjectButtonText}}" ng-click="showHide()" />
-            </div>
-        </div>
 
-        <div class="form-group" ng-show="showNewProject">
-            <label class="control-label col-md-2" for="project">New Project</label>
-            <div class="col-md-2">
-                <input type="text" ng-model="newProject.name" style="width: 160px;" />
-            </div>
-            <div class="col-md-8">
-                <input class="btn btn-default" type="button" id="btnSaveNewProject" value="Create Project" ng-click="addProject()" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="button" class="btn btn-default" value="Create Activity" ng-click="addActivity()" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" class="btn btn-default" value="Create Activity" ng-click="addActivity()" />
+                </div>
             </div>
         </div>
     </div>
@@ -72,54 +75,54 @@
 
     <script type="text/javascript">
 
-    //var myApp = angular.module('myApp', []);
+        //var myApp = angular.module('myApp', []);
 
-    //myApp.directive('fileModel', ['$parse', function ($parse) {
-    //    return {
-    //        restrict: 'A',
-    //        link: function (scope, element, attrs) {
-    //            var model = $parse(attrs.fileModel);
-    //            var modelSetter = model.assign;
+        //myApp.directive('fileModel', ['$parse', function ($parse) {
+        //    return {
+        //        restrict: 'A',
+        //        link: function (scope, element, attrs) {
+        //            var model = $parse(attrs.fileModel);
+        //            var modelSetter = model.assign;
 
-    //            element.bind('change', function () {
-    //                scope.$apply(function () {
-    //                    modelSetter(scope, element[0].files[0]);
-    //                });
-    //            });
-    //        }
-    //    };
-    //}]);
+        //            element.bind('change', function () {
+        //                scope.$apply(function () {
+        //                    modelSetter(scope, element[0].files[0]);
+        //                });
+        //            });
+        //        }
+        //    };
+        //}]);
 
-    //myApp.service('fileUpload', ['$http', function ($http) {
-    //    this.uploadFileToUrl = function (file, uploadUrl) {
-    //        var fd = new FormData();
-    //        fd.append('file', file);
-    //        $http.post(uploadUrl, fd, {
-    //            transformRequest: angular.identity,
-    //            headers: { 'Content-Type': undefined }
-    //        })
-    //        .success(function () {
-    //        })
-    //        .error(function () {
-    //        });
-    //    }
-    //}]);
+        //myApp.service('fileUpload', ['$http', function ($http) {
+        //    this.uploadFileToUrl = function (file, uploadUrl) {
+        //        var fd = new FormData();
+        //        fd.append('file', file);
+        //        $http.post(uploadUrl, fd, {
+        //            transformRequest: angular.identity,
+        //            headers: { 'Content-Type': undefined }
+        //        })
+        //        .success(function () {
+        //        })
+        //        .error(function () {
+        //        });
+        //    }
+        //}]);
 
-    //myApp.controller('myCtrl', ['$scope', 'fileUpload', function ($scope, fileUpload) {
+        //myApp.controller('myCtrl', ['$scope', 'fileUpload', function ($scope, fileUpload) {
 
-    //    $scope.uploadFile = function () {
-    //        var file = $scope.myFile;
-    //        console.log('file is ' + JSON.stringify(file));
-    //        var uploadUrl = "/fileUpload";
-    //        fileUpload.uploadFileToUrl(file, uploadUrl);
-    //    };
+        //    $scope.uploadFile = function () {
+        //        var file = $scope.myFile;
+        //        console.log('file is ' + JSON.stringify(file));
+        //        var uploadUrl = "/fileUpload";
+        //        fileUpload.uploadFileToUrl(file, uploadUrl);
+        //    };
 
-    //}]);
+        //}]);
 
-    $(function () {
-        $('#datepicker').datetimepicker();
-        $('#datepicker1').datetimepicker();
-    });
+        $(function () {
+            $('#datepicker').datetimepicker();
+            $('#datepicker1').datetimepicker();
+        });
 
 
 

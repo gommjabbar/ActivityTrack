@@ -271,6 +271,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\App\Activity\Controllers\displayActivitiesController.js" />
+    <Content Include="Scripts\App\Project\Controllers\displayProjectsController.js" />
     <Content Include="Scripts\App\Project\Controllers\createProjectController.js" />
     <Content Include="Scripts\App\Project\Services\projectServices.js" />
     <Content Include="Scripts\App\Activity\Controllers\createActivityController.js" />
