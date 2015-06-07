@@ -2,7 +2,7 @@
     var app = angular.module("activityTrack");
     app.controller("createActivityController", ['$scope', 'activityService',
 
-         function ($scope, activityService) {
+         function ($scope, $location, activityService) {
 
              $scope.activity = {
                  project: $scope.Projects,
@@ -18,6 +18,7 @@
                      data: $scope.activity
                  }).done(function (data) {
                      $scope.$apply();
+                     window.location.replace("/Activity/Index");
                  }).error(function (error) {
                      alert(error)
                  })

@@ -9,6 +9,23 @@
                  $scope.predicate = predicate;
              };
 
+             $scope.editItem = function (item) {
+                 item.editing = true;
+             }
+
+             $scope.doneEditing = function (item) {
+                 item.editing = false;
+                 //TODO edit in database
+                 //$.ajax(
+                 //{
+                 //    url: '/api/activities',
+                 //    type: 'put',
+                 //}).done(function (data) {
+                 //    $scope.Activities = data;
+                 //    $scope.$apply();
+                 //})
+             };
+
              $scope.getActivities = function () {
                  $.ajax(
                  {
