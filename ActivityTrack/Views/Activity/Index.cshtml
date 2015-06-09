@@ -6,31 +6,89 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 <div class="container" ng-controller="displayActivitiesController">
+    
+
+    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add a new activity</button>
+
+    <div id="myModal" class="modal fade" role="dialog" ng-controller="createActivityController">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add activity</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="dueDate">Due Date</label>
+                        <div>
+                            <input type="text" id="datepicker" ng-model="activity.dueDate" style="width: 160px" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <div>
+                            <input type="text" ng-model="activity.description" style="width: 160px;" />
+                        </div>
+                    </div>
+                    <div class="form-horizontal" ng-controller="displayProjectsController">
+                        <div class="form-horizontal" ng-controller="createProjectController">
+
+                            <label for="project">Project</label>
+                            <div>
+                                <select ng-model="activity.project"
+                                        ng-options="project.name for project in Projects track by project.id"
+                                        style="width: 160px; height: 25px; "></select>
+                            </div>
+                            <div>
+                                <input class="btn btn-default" type="button" id="btnShowNewProject" value="{{newProjectButtonText}}" ng-click="showHide()" />
+                            </div>
+
+                            <div ng-show="showNewProject">
+                                <label for="project">New Project</label>
+                                <div>
+                                    <input type="text" ng-model="newProject.name" style="width: 160px;" />
+                                </div>
+                                <div>
+                                    <input class="btn btn-default" type="button" id="btnSaveNewProject" value="Create Project" ng-click="addProject()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" ng-click="addActivity()" data-dismiss="modal">Create Activity</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <form>
         <div class="form-group">
             <div class="input-group">
+                <label >Filter projects</label>
                 <input type="text" class="form-control" placeholder="Filter by project..." ng-model="search.project.name">
             </div>
         </div>
     </form>
-    <table st-table="Activities" class="table table-bordered" >
+     
+    <table st-table="Activities" class="table table-bordered">
         <tr>
             <th class="col-md-2">
                 <a href="" ng-click="order('project.name')"> Project</a>
                 <span class="sortorder" ng-show="predicate === 'Project'" ng-class="{reverse:reverse}"></span>
             </th>
             <th class="col-md-2">
-                <a href="" ng-click="order('startDate')"> StartDate</a>
+                <a href="" ng-click="order('startDate')"> Start Date</a>
                 <span class="sortorder" ng-show="predicate === 'Start Date'" ng-class="{reverse:reverse}"></span>
             </th>
             <th class="col-md-2">
-                <a href="" ng-click="order('endDate')"> EndDate</a>
-                <span class="sortorder" ng-show="predicate === 'End Date'" ng-class="{reverse:reverse}"></span>
+                <a href="" ng-click="order('endDate')"> Due Date</a>
+                <span class="sortorder" ng-show="predicate === 'Due Date'" ng-class="{reverse:reverse}"></span>
             </th>
             <th class="col-md-4">
                 <a href="" ng-click="order('description')"> Description</a>
@@ -41,7 +99,7 @@
                 <span class="sortorder" ng-show="predicate === 'State'" ng-class="{reverse:reverse}"></span>
             </th>
         </tr>
-        
+
         <tbody>
             <tr ng-repeat="activity in Activities | filter:search | orderBy:predicate:reverse ">
 
@@ -59,11 +117,11 @@
                 </td>
                 <td>
                     <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{ activity.description }}</span>
-                    <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.description" ng-blur="doneEditing(activity)" autofocus />
+                    <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.description" required ng-blur="doneEditing(activity)" autofocus />
                 </td>
                 <td>
-                    <button ng-click="">Pause</button>
-                    <button ng-click="">End</button>
+                    <button ng-click="pauseActivity()">Pause</button>
+                    <button ng-click="endActivity">End</button>
                 </td>
             </tr>
         </tbody>

@@ -3,8 +3,9 @@
     app.controller("createProjectController", ['$scope', 'projectService',
 
          function ($scope, projectService) {
-             $scope.newProjectButtonText = 'Add';
+             $scope.newProjectButtonText = 'Add new project';
              $scope.showNewProject = false;
+             
 
              $scope.newProject = {
                  id: -1,
@@ -20,6 +21,7 @@
                  }).done(function (data) {
                      $scope.$apply();
                      $scope.getProjects();
+                     $scope.showHide();
                  }).error(function (error) {
                      alert(error)
                  })
@@ -31,7 +33,7 @@
                      $scope.newProjectButtonText = 'Cancel';
                  }
                  else {
-                     $scope.newProjectButtonText = 'Add';
+                     $scope.newProjectButtonText = 'Add new project';
                  }
              }
          }]);

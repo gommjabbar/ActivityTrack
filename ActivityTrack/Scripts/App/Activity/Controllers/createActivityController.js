@@ -4,10 +4,15 @@
 
          function ($scope, $location, activityService) {
 
+             $(function () {
+                 $('#datepicker').datetimepicker();
+             });
+
              $scope.activity = {
-                 project: $scope.Projects,
-                 startDate: new Date().toISOString(),
-                 endDate: undefined,
+                 projectid: $scope.projectId,
+                 project: undefined,
+                 startDate: undefined,
+                 endDate: $scope.endDate,
              }
 
              $scope.addActivity = function () {
@@ -18,7 +23,8 @@
                      data: $scope.activity
                  }).done(function (data) {
                      $scope.$apply();
-                     window.location.replace("/Activity/Index");
+                     $scope.getActivities();
+                     //window.location.replace("/Activity/Index");
                  }).error(function (error) {
                      alert(error)
                  })

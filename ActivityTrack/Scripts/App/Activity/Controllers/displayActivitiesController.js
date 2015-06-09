@@ -9,21 +9,44 @@
                  $scope.predicate = predicate;
              };
 
+             $scope.pauseActivity = function (item) {
+                 $.ajax(
+                 {
+                     url: '/api/activities/pause',
+                     type: 'put',
+                 }).done(function (data) {
+                     $scope.Activities = data;
+                     $scope.$apply();
+                 })
+             }
+
+             $scope.endActivity = function (item) {
+                 $.ajax(
+                 {
+                     url: '/api/activities/end',
+                     type: 'put',
+                 }).done(function (data) {
+                     $scope.Activities = data;
+                     $scope.$apply();
+                 })
+             }
+
              $scope.editItem = function (item) {
                  item.editing = true;
              }
 
              $scope.doneEditing = function (item) {
                  item.editing = false;
-                 //TODO edit in database
-                 //$.ajax(
-                 //{
-                 //    url: '/api/activities',
-                 //    type: 'put',
-                 //}).done(function (data) {
-                 //    $scope.Activities = data;
-                 //    $scope.$apply();
-                 //})
+                 //TODO update in database
+                 $.ajax(
+                 {
+                     url: '/api/activities',
+                     type: 'put',
+                     data: $scope.activity
+                 }).done(function (data) {
+                     $scope.Activities = data;
+                     $scope.$apply();
+                 })
              };
 
              $scope.getActivities = function () {
