@@ -22,9 +22,9 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="dueDate">Due Date</label>
+                        <label for="endDate">Due Date</label>
                         <div>
-                            <input type="text" id="datepicker" ng-model="activity.dueDate" style="width: 160px" />
+                            <input type="text" id="datepicker" ng-model="activity.endDate" style="width: 160px" />
                         </div>
                     </div>
 
@@ -83,10 +83,6 @@
                 <span class="sortorder" ng-show="predicate === 'Project'" ng-class="{reverse:reverse}"></span>
             </th>
             <th class="col-md-2">
-                <a href="" ng-click="order('startDate')"> Start Date</a>
-                <span class="sortorder" ng-show="predicate === 'Start Date'" ng-class="{reverse:reverse}"></span>
-            </th>
-            <th class="col-md-2">
                 <a href="" ng-click="order('endDate')"> Due Date</a>
                 <span class="sortorder" ng-show="predicate === 'Due Date'" ng-class="{reverse:reverse}"></span>
             </th>
@@ -98,6 +94,10 @@
                 <a href="" ng-click="order('State')"> State</a>
                 <span class="sortorder" ng-show="predicate === 'State'" ng-class="{reverse:reverse}"></span>
             </th>
+            <th class="col-md-2">
+                <a href="" ng-click="order('Elapsed Time')"> Elapsed Time</a>
+                <span class="sortorder" ng-show="predicate === 'Elapsed Time'" ng-class="{reverse:reverse}"></span>
+            </th>
         </tr>
 
         <tbody>
@@ -108,10 +108,6 @@
                     <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.project.name" ng-blur="doneEditing(activity)" autofocus />
                 </td>
                 <td>
-                    <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{ activity.startDate | date: 'yyyy-MM-dd HH:mm' }}</span>
-                    <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.startDate" ng-blur="doneEditing(activity)" autofocus />
-                </td>
-                <td>
                     <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{ activity.endDate | date: 'yyyy-MM-dd HH:mm' }}</span>
                     <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.endDate" ng-blur="doneEditing(activity)" autofocus />
                 </td>
@@ -120,9 +116,13 @@
                     <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.description" required ng-blur="doneEditing(activity)" autofocus />
                 </td>
                 <td>
-                    <button ng-click="startActivity(activity)" >{{StartButton}}</button>
-                    <button ng-click="pauseActivity(activity)" >{{PauseButton}}</button>
-                    <button ng-click="endActivity(activity)" >{{EndButton}}</button>
+                    <button ng-click="startActivity(activity)" value="{{StartButton}}">{{StartButton}}</button>
+                    <button ng-click="pauseActivity(activity)" value="{{PauseButton}}">{{PauseButton}}</button>
+                    <button ng-click="endActivity(activity)" value="{{EndButton}}">{{EndButton}}</button>
+                </td>
+                <td>
+                    <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{ activity.elapsedTime }}</span>
+                    <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.elapsedTime" required ng-blur="doneEditing(activity)" autofocus />
                 </td>
             </tr>
         </tbody>

@@ -9,10 +9,7 @@
              });
 
              $scope.activity = {
-                 projectid: $scope.projectId,
-                 project: undefined,
-                 startDate: undefined,
-                 endDate: $scope.endDate,
+                 endDate: new Date().now,
              }
 
              $scope.addActivity = function () {
