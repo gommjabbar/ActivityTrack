@@ -9,14 +9,32 @@
                  $scope.predicate = predicate;
              };
 
+             $scope.StartButton = 'Start';
+             $scope.PauseButton = 'Pause';
+             $scope.EndButton = 'End';
+
+             $scope.startActivity = function (item) {
+                 $.ajax(
+                 {
+                     url: '/api/activities/start',
+                     type: 'put',
+                     data: item
+                 }).done(function (data) {
+                     $scope.$apply();
+                     //$scope.StartShowHide();
+                     
+                 })
+             }
+
              $scope.pauseActivity = function (item) {
                  $.ajax(
                  {
                      url: '/api/activities/pause',
                      type: 'put',
+                     data: item
                  }).done(function (data) {
-                     $scope.Activities = data;
                      $scope.$apply();
+                     //$scope.StartShowHide();
                  })
              }
 
@@ -25,9 +43,10 @@
                  {
                      url: '/api/activities/end',
                      type: 'put',
+                     data: item
                  }).done(function (data) {
-                     $scope.Activities = data;
                      $scope.$apply();
+                    // $scope.StartShowHide();
                  })
              }
 

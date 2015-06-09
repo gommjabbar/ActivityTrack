@@ -120,8 +120,9 @@
                     <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.description" required ng-blur="doneEditing(activity)" autofocus />
                 </td>
                 <td>
-                    <button ng-click="pauseActivity()">Pause</button>
-                    <button ng-click="endActivity">End</button>
+                    <button ng-click="startActivity(activity)" >{{StartButton}}</button>
+                    <button ng-click="pauseActivity(activity)" >{{PauseButton}}</button>
+                    <button ng-click="endActivity(activity)" >{{EndButton}}</button>
                 </td>
             </tr>
         </tbody>
