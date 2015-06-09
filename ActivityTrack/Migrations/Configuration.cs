@@ -1,3 +1,6 @@
+using ActivityTrack.DTO;
+using ActivityTrack.Models;
+
 namespace ActivityTrack.Migrations
 {
     using System;
@@ -27,6 +30,14 @@ namespace ActivityTrack.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            //ProjectEO p1 = new ProjectEO{Name = "Test1"};
+            //ProjectEO p2 = new ProjectEO{ Name ="Test2"};
+
+            //context.Projects.AddOrUpdate(p1);
+            //context.Projects.AddOrUpdate(p2);
+
+
         }
     }
 }

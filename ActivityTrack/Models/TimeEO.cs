@@ -14,6 +14,6 @@ namespace ActivityTrack.Models
         public DateTimeOffset StartDate { get; set; }
         public DateTimeOffset? EndDate { get; set; }
         public int ActivityId { get; set; }
-        public virtual Activity Activity { get; set; }
+        public virtual ActivityEO Activity { get; set; }
     }
 }

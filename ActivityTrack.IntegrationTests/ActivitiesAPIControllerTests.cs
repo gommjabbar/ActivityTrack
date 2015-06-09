@@ -83,7 +83,6 @@ namespace ActivityTrack.IntegrationTests
 
             Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
 
-            /*
             //activityTypeId has no value
             var a2 = new activity();
 
@@ -107,7 +106,6 @@ namespace ActivityTrack.IntegrationTests
             var result3 = ctrl.Add(a1);
 
             Assert.IsNotInstanceOfType(result3, typeof(BadRequestResult));
-             * */
         }
 
         [TestMethod]

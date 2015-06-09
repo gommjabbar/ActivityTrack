@@ -62,7 +62,8 @@ namespace ActivityTrack.Controllers
         [Route("api/activities")]
         public IHttpActionResult Add(activity activityDTO)
         {
-            var activityEO = Mapper.Map<ActivityEO>(activityDTO);
+            var activityEO = new ActivityEO();
+            activityEO = Mapper.Map<ActivityEO>(activityDTO);
 
             activityEO.ActivityState = Models.IdEnums.ActivityStateIds.New;
 
