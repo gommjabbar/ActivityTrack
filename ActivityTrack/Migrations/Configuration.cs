@@ -31,11 +31,11 @@ namespace ActivityTrack.Migrations
             //    );
             //
 
-            //ProjectEO p1 = new ProjectEO{Name = "Test1"};
-            //ProjectEO p2 = new ProjectEO{ Name ="Test2"};
+            ProjectEO p1 = new ProjectEO{Name = "Test1"};
+            ProjectEO p2 = new ProjectEO{ Name ="Test2"};
 
-            //context.Projects.AddOrUpdate(p1);
-            //context.Projects.AddOrUpdate(p2);
+            context.Projects.AddOrUpdate(p1);
+            context.Projects.AddOrUpdate(p2);
 
 
         }

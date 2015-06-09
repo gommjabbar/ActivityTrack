@@ -8,7 +8,7 @@ using System.Web;
 namespace ActivityTrack.Models
 {
     [Table("Times")]
-    public class TimeEO
+    public class TimeEO: BaseEntity
     {
         public int Id { get; set; }
         public DateTimeOffset StartDate { get; set; }

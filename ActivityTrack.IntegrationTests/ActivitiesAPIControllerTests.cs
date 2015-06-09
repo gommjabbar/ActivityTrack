@@ -12,6 +12,54 @@ namespace ActivityTrack.IntegrationTests
     public class ActivitiesAPIControllerTests
     {
         [TestMethod]
+        public void StartActivity()
+        {
+            AutoMapperConfig.Configure();
+            var ctrl = new ActivitiesAPIController();
+
+            var a1 = new activity();
+
+            a1.id = 3;
+
+            var result = ctrl.StartActivity(a1);
+
+            Assert.IsNotInstanceOfType(result, typeof(BadRequestResult));
+
+        }
+
+        [TestMethod]
+        public void PauseActivity()
+        {
+            AutoMapperConfig.Configure();
+            var ctrl = new ActivitiesAPIController();
+
+            var a1 = new activity();
+
+            a1.id = 3;
+
+            var result = ctrl.PauseActivity(a1);
+
+            Assert.IsNotInstanceOfType(result, typeof(BadRequestResult));
+
+        }
+
+        [TestMethod]
+        public void EndActivity()
+        {
+            AutoMapperConfig.Configure();
+            var ctrl = new ActivitiesAPIController();
+
+            var a1 = new activity();
+
+            a1.id = 3;
+
+            var result = ctrl.EndActivity(a1);
+
+            Assert.IsNotInstanceOfType(result, typeof(BadRequestResult));
+
+        }
+
+        [TestMethod]
         public void GetAllActivities()
         {
             AutoMapperConfig.Configure();

@@ -63,6 +63,7 @@ namespace ActivityTrack.Controllers
         public IHttpActionResult Add(activity activityDTO)
         {
             var activityEO = new ActivityEO();
+
             activityEO = Mapper.Map<ActivityEO>(activityDTO);
 
             activityEO.ActivityState = Models.IdEnums.ActivityStateIds.New;
@@ -82,7 +83,7 @@ namespace ActivityTrack.Controllers
         [Route("api/activities/start")]
         public IHttpActionResult StartActivity(activity activityDTO)
         {
-            var activityEO = Mapper.Map<ActivityEO>(activityDTO);
+            var activityEO = _activityRepository.Get().ToList().First(a => a.Id == activityDTO.id);
 
             if (activityEO.ActivityState != Models.IdEnums.ActivityStateIds.Started)
             {
@@ -106,7 +107,7 @@ namespace ActivityTrack.Controllers
         [Route("api/activities/pause")]
         public IHttpActionResult PauseActivity(activity activityDTO)
         {
-            var activityEO = Mapper.Map<ActivityEO>(activityDTO);
+            var activityEO = _activityRepository.Get().ToList().First(a => a.Id == activityDTO.id);
 
             if (activityEO.ActivityState == Models.IdEnums.ActivityStateIds.Started)
             {
@@ -127,7 +128,7 @@ namespace ActivityTrack.Controllers
         [Route("api/activities/end")]
         public IHttpActionResult EndActivity(activity activityDTO)
         {
-            var activityEO = Mapper.Map<ActivityEO>(activityDTO);
+            var activityEO = _activityRepository.Get().ToList().First(a => a.Id == activityDTO.id);
 
             if (activityEO.ActivityState == Models.IdEnums.ActivityStateIds.Started)
             {
