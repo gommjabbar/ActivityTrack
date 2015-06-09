@@ -59,5 +59,7 @@ namespace ActivityTrack.Models
         public DbSet<ActivityTypeEO> ActivityTypes { get; set; }
 
         public DbSet<ProjectEO> Projects { get; set; }
+
+        public DbSet<TimeEO> Times { get; set; }
     }
 }
