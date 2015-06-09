@@ -65,7 +65,12 @@ namespace ActivityTrack.Controllers
             var activityEO = new ActivityEO();
 
             activityEO = Mapper.Map<ActivityEO>(activityDTO);
-
+            if (activityEO.ProjectId == 0)
+            {
+                activityEO.ProjectId = activityEO.Project.Id;
+                activityEO.Project = null;
+            }
+ 
             activityEO.ActivityState = Models.IdEnums.ActivityStateIds.New;
 
             if (!ModelState.IsValid)
