@@ -12,6 +12,7 @@ namespace ActivityTrack.Controllers
     public class ActivitiesAPIController : ApiController
     {
         private IActivityEORepository _activityRepository = new ActivityEORepository();
+        private ITimeEORepository _timeRepository = new TimeEORepository();
 
         [HttpGet]
         [Route("api/activities")]
@@ -82,11 +83,22 @@ namespace ActivityTrack.Controllers
         {
             var activityEO = Mapper.Map<ActivityEO>(activityDTO);
 
-            activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Started;
+            if (activityEO.ActivityState != Models.IdEnums.ActivityStateIds.Started)
+            {
 
-            _activityRepository.Update(activityEO);
+                activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Started;
 
-            return Json(activityDTO);
+                _activityRepository.Update(activityEO);
+
+                var time = new TimeEO();
+                time.StartDate = DateTimeOffset.Now;
+                time.ActivityId = activityEO.Id;
+
+                _timeRepository.Insert(time);
+
+                return Json(activityDTO);
+            }
+            return BadRequest();
         }
 
         [HttpPut]
@@ -95,13 +107,20 @@ namespace ActivityTrack.Controllers
         {
             var activityEO = Mapper.Map<ActivityEO>(activityDTO);
 
-            activityEO.UpdateDate = DateTimeOffset.Now;
+            if (activityEO.ActivityState == Models.IdEnums.ActivityStateIds.Started)
+            {
+                var last = _timeRepository.Get().ToList().Last(time => time.ActivityId == activityEO.Id);
+                last.EndDate = DateTimeOffset.Now;
+                _timeRepository.Update(last);
 
-            activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Paused;
+                activityEO.UpdateDate = DateTimeOffset.Now;
+                activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Paused;
+                activityEO.ElapsedTime = _timeRepository.ElapsedTimeById(activityEO.Id);
+                _activityRepository.Update(activityEO);
 
-            _activityRepository.Update(activityEO);
-
-            return Json(activityDTO);
+                return Json(activityDTO);
+            }
+            return BadRequest();
         }
         [HttpPut]
         [Route("api/activities/end")]
@@ -109,11 +128,28 @@ namespace ActivityTrack.Controllers
         {
             var activityEO = Mapper.Map<ActivityEO>(activityDTO);
 
-            activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Ended;
+            if (activityEO.ActivityState == Models.IdEnums.ActivityStateIds.Started)
+            {
+                var last = _timeRepository.Get().ToList().Last(time => time.ActivityId == activityEO.Id);
 
-            _activityRepository.Update(activityEO);
+                last.EndDate = DateTimeOffset.Now;
 
-            return Json(activityDTO);
+                _timeRepository.Update(last);
+
+                activityEO.ElapsedTime = _timeRepository.ElapsedTimeById(activityEO.Id);
+            }
+
+            if (activityEO.ActivityState != Models.IdEnums.ActivityStateIds.Ended)
+            {
+
+                activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Ended;
+
+                _activityRepository.Update(activityEO);
+
+                return Json(activityDTO);
+            }
+
+            return BadRequest();
         }
         [HttpPut]
         [Route("api/activities")]

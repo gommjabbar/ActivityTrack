@@ -73,17 +73,17 @@ namespace ActivityTrack.IntegrationTests
 
             //projectId has no value
             var a1 = new activity();
-
+            a1.projectId = 1;
             a1.startDate = DateTimeOffset.Now;
             a1.endDate = DateTimeOffset.Now;
             a1.description = "test";
-            a1.typeId = 1;
+            //a1.typeId = 0;
 
             var result1 = ctrl.Add(a1);
 
             Assert.IsInstanceOfType(result1, typeof(BadRequestResult));
 
-
+            /*
             //activityTypeId has no value
             var a2 = new activity();
 
@@ -107,6 +107,7 @@ namespace ActivityTrack.IntegrationTests
             var result3 = ctrl.Add(a1);
 
             Assert.IsNotInstanceOfType(result3, typeof(BadRequestResult));
+             * */
         }
 
         [TestMethod]

@@ -205,9 +205,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201506051159297_First.cs" />
-    <Compile Include="Migrations\201506051159297_First.Designer.cs">
-      <DependentUpon>201506051159297_First.cs</DependentUpon>
+    <Compile Include="Migrations\201506091439334_ElapsedTime.cs" />
+    <Compile Include="Migrations\201506091439334_ElapsedTime.Designer.cs">
+      <DependentUpon>201506091439334_ElapsedTime.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -219,13 +219,16 @@
     <Compile Include="Models\IdEnums\ActivityStateIds.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProjectEO.cs" />
+    <Compile Include="Models\TimeEO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ActivityEORepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\IActivityEORepository.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
     <Compile Include="Repository\IProjectEORepository.cs" />
+    <Compile Include="Repository\ITimeEORepository.cs" />
     <Compile Include="Repository\ProjectEORepository.cs" />
+    <Compile Include="Repository\TimeEORepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1205,8 +1208,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506051159297_First.resx">
-      <DependentUpon>201506051159297_First.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201506091439334_ElapsedTime.resx">
+      <DependentUpon>201506091439334_ElapsedTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

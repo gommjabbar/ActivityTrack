@@ -3,7 +3,7 @@ namespace ActivityTrack.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class First : DbMigration
+    public partial class ElapsedTime : DbMigration
     {
         public override void Up()
         {
@@ -12,12 +12,13 @@ namespace ActivityTrack.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        StartDate = c.DateTimeOffset(nullable: false, precision: 7),
+                        StartDate = c.DateTimeOffset(precision: 7),
                         EndDate = c.DateTimeOffset(precision: 7),
                         Description = c.String(),
                         ActivityState = c.Int(nullable: false),
                         ActivityTypeId = c.Int(),
                         ProjectId = c.Int(nullable: false),
+                        ElapsedTime = c.Double(nullable: false),
                         CreateDate = c.DateTimeOffset(precision: 7),
                         UpdateDate = c.DateTimeOffset(precision: 7),
                         DeleteDate = c.DateTimeOffset(precision: 7),
@@ -27,6 +28,20 @@ namespace ActivityTrack.Migrations
                 .ForeignKey("dbo.Projects", t => t.ProjectId, cascadeDelete: true)
                 .Index(t => t.ActivityTypeId)
                 .Index(t => t.ProjectId);
+            
+            CreateTable(
+                "dbo.Times",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        StartDate = c.DateTimeOffset(nullable: false, precision: 7),
+                        EndDate = c.DateTimeOffset(precision: 7),
+                        ActivityId = c.Int(nullable: false),
+                        ActivityEO_Id = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Activities", t => t.ActivityEO_Id)
+                .Index(t => t.ActivityEO_Id);
             
             CreateTable(
                 "dbo.ActivityTypes",
@@ -131,12 +146,14 @@ namespace ActivityTrack.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Activities", "ProjectId", "dbo.Projects");
             DropForeignKey("dbo.Activities", "ActivityTypeId", "dbo.ActivityTypes");
+            DropForeignKey("dbo.Times", "ActivityEO_Id", "dbo.Activities");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Times", new[] { "ActivityEO_Id" });
             DropIndex("dbo.Activities", new[] { "ProjectId" });
             DropIndex("dbo.Activities", new[] { "ActivityTypeId" });
             DropTable("dbo.AspNetUserLogins");
@@ -146,6 +163,7 @@ namespace ActivityTrack.Migrations
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Projects");
             DropTable("dbo.ActivityTypes");
+            DropTable("dbo.Times");
             DropTable("dbo.Activities");
         }
     }

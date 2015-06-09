@@ -7,13 +7,13 @@ namespace ActivityTrack.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class First : IMigrationMetadata
+    public sealed partial class ElapsedTime : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(First));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ElapsedTime));
         
         string IMigrationMetadata.Id
         {
-            get { return "201506051159297_First"; }
+            get { return "201506091439334_ElapsedTime"; }
         }
         
         string IMigrationMetadata.Source
