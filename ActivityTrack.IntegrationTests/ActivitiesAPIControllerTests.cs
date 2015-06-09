@@ -19,7 +19,7 @@ namespace ActivityTrack.IntegrationTests
 
             var a1 = new activity();
 
-            a1.id = 3;
+            a1.id = 4;
 
             var result = ctrl.StartActivity(a1);
 
@@ -35,7 +35,7 @@ namespace ActivityTrack.IntegrationTests
 
             var a1 = new activity();
 
-            a1.id = 3;
+            a1.id = 4;
 
             var result = ctrl.PauseActivity(a1);
 
@@ -51,7 +51,7 @@ namespace ActivityTrack.IntegrationTests
 
             var a1 = new activity();
 
-            a1.id = 3;
+            a1.id = 4;
 
             var result = ctrl.EndActivity(a1);
 
@@ -85,7 +85,6 @@ namespace ActivityTrack.IntegrationTests
             var a1 = new activity();
 
             a1.id = 1;
-            a1.startDate = DateTimeOffset.Now;
             a1.endDate = DateTimeOffset.Now;
             a1.description = "test";
             a1.typeId = 1;
@@ -98,7 +97,6 @@ namespace ActivityTrack.IntegrationTests
             //just mandatory fields completed
             var a2 = new activity();
 
-            a2.startDate = DateTimeOffset.Now;
             a2.description = "test";
             a2.typeId = 1;
             a2.projectId = 1;
@@ -121,8 +119,7 @@ namespace ActivityTrack.IntegrationTests
 
             //projectId has no value
             var a1 = new activity();
-            a1.projectId = 1;
-            a1.startDate = DateTimeOffset.Now;
+            a1.projectId = 5;
             a1.endDate = DateTimeOffset.Now;
             a1.description = "test";
             //a1.typeId = 0;
@@ -134,7 +131,6 @@ namespace ActivityTrack.IntegrationTests
             //activityTypeId has no value
             var a2 = new activity();
 
-            a2.startDate = DateTimeOffset.Now;
             a1.endDate = DateTimeOffset.Now;
             a2.description = "test";
             a2.projectId = 1;
@@ -147,7 +143,6 @@ namespace ActivityTrack.IntegrationTests
             //projectId and ativityTypeId has no value
             var a3 = new activity();
 
-            a3.startDate = DateTimeOffset.Now;
             a3.endDate = DateTimeOffset.Now;
             a3.description = "test";
 
@@ -258,7 +253,6 @@ namespace ActivityTrack.IntegrationTests
             var a1 = new activity();
 
             a1.id = 3;
-            a1.startDate = DateTimeOffset.Now;
             a1.endDate = DateTimeOffset.Now;
             a1.description = "test";
             a1.typeId = 1;
@@ -283,7 +277,6 @@ namespace ActivityTrack.IntegrationTests
             var a1 = new activity();
 
             a1.id = 2;
-            a1.startDate = DateTimeOffset.Now;
             a1.endDate = DateTimeOffset.Now;
             a1.description = "test";
             a1.typeId = 1;

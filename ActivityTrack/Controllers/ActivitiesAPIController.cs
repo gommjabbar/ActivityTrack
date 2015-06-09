@@ -62,9 +62,8 @@ namespace ActivityTrack.Controllers
         [Route("api/activities")]
         public IHttpActionResult Add(activity activityDTO)
         {
-            var activityEO = new ActivityEO();
+            ActivityEO activityEO = Mapper.Map<ActivityEO>(activityDTO);
 
-            activityEO = Mapper.Map<ActivityEO>(activityDTO);
             if (activityEO.ProjectId == 0)
             {
                 activityEO.ProjectId = activityEO.Project.Id;
