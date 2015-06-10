@@ -8,8 +8,8 @@
                  $('#datepicker').datetimepicker();
              });
 
-             $scope.activity = {
-                 endDate: new Date().now,
+             $scope.activity = {    
+                 endDate: $scope.endDate,
              }
 
              $scope.addActivity = function () {

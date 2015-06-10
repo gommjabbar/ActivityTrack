@@ -21,6 +21,7 @@
                      data: item
                  }).done(function (data) {
                      $scope.$apply();
+                     $scope.getActivities();
                      //$scope.StartShowHide();
                      
                  })
@@ -34,6 +35,7 @@
                      data: item
                  }).done(function (data) {
                      $scope.$apply();
+                     $scope.getActivities();
                      //$scope.StartShowHide();
                  })
              }
@@ -46,6 +48,7 @@
                      data: item
                  }).done(function (data) {
                      $scope.$apply();
+                     $scope.getActivities();
                     // $scope.StartShowHide();
                  })
              }
@@ -61,9 +64,8 @@
                  {
                      url: '/api/activities',
                      type: 'put',
-                     data: $scope.activity
+                     data: item
                  }).done(function (data) {
-                     $scope.Activities = data;
                      $scope.$apply();
                  })
              };
