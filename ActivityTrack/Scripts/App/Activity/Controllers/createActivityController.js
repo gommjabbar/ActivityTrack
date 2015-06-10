@@ -12,6 +12,11 @@
                  endDate: $scope.endDate,
              }
 
+             $scope.updateProjectId = function()
+             {
+                 $scope.activity.projectid = $scope.activity.project.id;
+             }
+
              $scope.addActivity = function () {
                  $.ajax(
                  {

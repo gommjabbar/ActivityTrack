@@ -8,7 +8,6 @@
 
 
 <div class="container" ng-controller="displayActivitiesController">
-    
 
     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add a new activity</button>
 
@@ -20,13 +19,15 @@
                     <h4 class="modal-title">Add activity</h4>
                 </div>
                 <div class="modal-body">
-                   
+
                     <div class="form-group">
                         <label for="endDate">Due Date</label>
                         <div>
                             <input type="text" id="datepicker" ng-model="activity.endDate" style="width: 160px" />
+                            <pre>Date is: <em>{{activity.endDate}}</em></pre>
                         </div>
                     </div>
+
 
                     <div class="form-group">
                         <label for="description">Description</label>
@@ -41,6 +42,7 @@
                             <div>
                                 <select ng-model="activity.project"
                                         ng-options="project.name for project in Projects track by project.id"
+                                        ng-change="updateProject()"
                                         style="width: 160px; height: 25px; "></select>
                             </div>
                             <div>
@@ -70,12 +72,12 @@
     <form>
         <div class="form-group">
             <div class="input-group">
-                <label >Filter projects</label>
+                <label>Filter projects</label>
                 <input type="text" class="form-control" placeholder="Filter by project..." ng-model="search.project.name">
             </div>
         </div>
     </form>
-     
+
     <table st-table="Activities" class="table table-bordered">
         <tr>
             <th class="col-md-2">
@@ -102,7 +104,6 @@
 
         <tbody>
             <tr ng-repeat="activity in Activities | filter:search | orderBy:predicate:reverse ">
-
                 <td>
                     <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{activity.project.name}}</span>
                     <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.project.name" ng-blur="doneEditing(activity)" autofocus />
@@ -116,9 +117,18 @@
                     <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.description" required ng-blur="doneEditing(activity)" autofocus />
                 </td>
                 <td>
-                    <button ng-click="startActivity(activity)" value="{{StartButton}}">{{StartButton}}</button>
-                    <button ng-click="pauseActivity(activity)" value="{{PauseButton}}">{{PauseButton}}</button>
-                    <button ng-click="endActivity(activity)" value="{{EndButton}}">{{EndButton}}</button>
+                    <button ng-click="startActivity(activity)" ng-show="activity.activityState==0 || activity.activityState==3">
+                        {{StartButton}}
+                    </button>
+                    <button ng-click="pauseActivity(activity)" ng-show="activity.activityState==1">
+                        {{PauseButton}}
+                    </button>
+                    <button ng-click="endActivity(activity)" ng-show="activity.activityState==1">
+                        {{EndButton}}
+                    </button>
+                    <button ng-click="resumeActivity(activity)" ng-show="activity.activityState==2">
+                        {{ResumeButton}}
+                    </button>
                 </td>
                 <td>
                     <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{ activity.elapsedTime }}</span>
@@ -128,4 +138,3 @@
         </tbody>
     </table>
 </div>
-
