@@ -131,8 +131,8 @@
                     </button>
                 </td>
                 <td>
-                    <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{ activity.elapsedTime }}</span>
-                    <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.elapsedTime" required ng-blur="doneEditing(activity)" autofocus />
+                    <span >{{ activity.elapsedTime/60 | number:0 }} minute(s) {{ activity.elapsedTime | number:2}}</span>
+                   
                 </td>
             </tr>
         </tbody>
