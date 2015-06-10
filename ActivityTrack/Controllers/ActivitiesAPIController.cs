@@ -14,17 +14,31 @@ namespace ActivityTrack.Controllers
         private IActivityEORepository _activityRepository = new ActivityEORepository();
         private ITimeEORepository _timeRepository = new TimeEORepository();
 
+        /// <summary>
+        /// This method will return all activities. If there are no activities an empty page will be returned.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/activities")]
-        public IHttpActionResult GetAll()
+        public JsonNamedCollectionResponse<activity> GetAll()
         {
-            var activitiesEO = _activityRepository.Get();
+            return new JsonNamedCollectionResponse<activity>(Request, () =>
+                {
+                    var activitiesEO = _activityRepository.Get();
 
-            List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
+                    return activitiesEO.Select(Mapper.Map<activity>).ToList();
 
-            return Json(activitiesDTO);
+                },"activities");
+            
         }
 
+
+        /// <summary>
+        /// This method will return all activities of project with given id
+        /// If the project doesn't have activities the method will return BadRequest with message "project has no activities"
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/projects/{projectId}/activities")]
         public IHttpActionResult GetActivitiesOfProject(int projectId)
@@ -33,20 +47,45 @@ namespace ActivityTrack.Controllers
 
             List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
 
+            if (activitiesDTO.Count == 0)
+            {
+                return BadRequest("no activities for project with id "+projectId);
+            }
+
             return Json(activitiesDTO);
         }
 
+
+        /// <summary>
+        /// This method will return the activity with given id.
+        /// If there are no activity with this id the method will return BadRequest with message "no activity with given id"
+        /// </summary>
+        /// <param name="activityId"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/activities/{activityId}")]
         public IHttpActionResult GetActivity(int activityId)
         {
             var activityEO = _activityRepository.GetById(activityId);
 
+            if (activityEO == null)
+            {
+                return BadRequest("no project with given id " + activityId);
+            }
+
             var activityDTO = Mapper.Map<activity>(activityEO);
 
             return Json(activityDTO);
         }
 
+
+        /// <summary>
+        /// This method will return all activities that has id between [offset; offset+length)
+        /// If there are no activities maching, the method will return BadRequest with message "no activities with id between [offset; offset+length)"
+        /// </summary>
+        /// <param name="offset"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/activities")]
         public IHttpActionResult GetFromTo(int offset, int length)
@@ -55,9 +94,21 @@ namespace ActivityTrack.Controllers
 
             List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
 
+            if (activitiesDTO.Count == 0)
+            {
+                return BadRequest("no activities with id between ["+offset+"; "+(offset+length)+")");
+            }
+
             return Json(activitiesDTO);
         }
 
+
+        /// <summary>
+        /// This method will add a new given activity in database
+        /// If given activity is not valid the method will return BadRequest(ModelState)
+        /// </summary>
+        /// <param name="activityDTO"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/activities")]
         public IHttpActionResult Add(activity activityDTO)
@@ -82,7 +133,12 @@ namespace ActivityTrack.Controllers
             return Json(activityDTO);
         }
 
-        
+        /// <summary>
+        /// This method will update the given activity as parametter, setting state to Started
+        /// If given activity is not valid the method will return BadRequest(ModelState)
+        /// </summary>
+        /// <param name="activityDTO"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("api/activities/start")]
         public IHttpActionResult StartActivity(activity activityDTO)
@@ -107,6 +163,13 @@ namespace ActivityTrack.Controllers
             return BadRequest();
         }
 
+
+        /// <summary>
+        /// This method will update the given activity as parametter, setting state to Paused
+        /// If given activity is not valid the method will return BadRequest(ModelState)
+        /// </summary>
+        /// <param name="activityDTO"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("api/activities/pause")]
         public IHttpActionResult PauseActivity(activity activityDTO)
@@ -128,6 +191,14 @@ namespace ActivityTrack.Controllers
             }
             return BadRequest();
         }
+
+
+        /// <summary>
+        /// This method will update the given activity as parametter, setting state to Ended
+        /// If given activity is not valid the method will return BadRequest(ModelState)
+        /// </summary>
+        /// <param name="activityDTO"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("api/activities/end")]
         public IHttpActionResult EndActivity(activity activityDTO)
@@ -157,6 +228,13 @@ namespace ActivityTrack.Controllers
 
             return BadRequest();
         }
+
+        /// <summary>
+        /// This method will update the given activity as parametter.
+        /// If given activity is not valid the method will return BadRequest(ModelState)
+        /// </summary>
+        /// <param name="activityDTO"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("api/activities")]
         public IHttpActionResult Update(activity activityDTO)
