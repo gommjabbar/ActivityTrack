@@ -20,9 +20,9 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/activities")]
-        public JsonNamedCollectionResponse<activity> GetAll()
+        public JsonCollectionResponse<activity> GetAll()
         {
-            return new JsonNamedCollectionResponse<activity>(Request, () =>
+            return new JsonCollectionResponse<activity>(Request, () =>
                 {
                     var activitiesEO = _activityRepository.Get();
 
@@ -40,9 +40,9 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/projects/{projectId}/activities")]
-        public JsonNamedCollectionResponse<activity> GetActivitiesOfProject(int projectId)
+        public JsonCollectionResponse<activity> GetActivitiesOfProject(int projectId)
         {
-            return new JsonNamedCollectionResponse<activity>(Request, () =>
+            return new JsonCollectionResponse<activity>(Request, () =>
             {
                 var activitiesEO = _activityRepository.ProjectActivities(projectId);
                 return activitiesEO.Select(Mapper.Map<activity>).ToList();
@@ -79,9 +79,9 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/activities")]
-        public JsonNamedCollectionResponse<activity> GetFromTo(int offset, int length)
+        public JsonCollectionResponse<activity> GetFromTo(int offset, int length)
         {
-            return new JsonNamedCollectionResponse<activity>(Request, () =>
+            return new JsonCollectionResponse<activity>(Request, () =>
             {
                 var activitiesEO = _activityRepository.GetFromTo(offset, length);
 

@@ -6,15 +6,15 @@ using System.Web;
 
 namespace ActivityTrack
 {
-    public class JsonNamedCollectionResponse<T> : GenericResponse<IEnumerable<T>>
+    public class JsonCollectionResponse<T> : GenericResponse<IEnumerable<T>>
     {
         /// <summary>
         /// Named result
         /// </summary>
         public IEnumerable<T> Result { get; set; }
 
-        public JsonNamedCollectionResponse(HttpRequestMessage request, Func<IEnumerable<T>> getResponseCollection, string collectionName = null)
-            : base(request,getResponseCollection, collectionName)
+        public JsonCollectionResponse(HttpRequestMessage request, Func<IEnumerable<T>> getResponseCollection, string collectionName = null)
+            : base(request,getResponseCollection)
         {            
         }
     }

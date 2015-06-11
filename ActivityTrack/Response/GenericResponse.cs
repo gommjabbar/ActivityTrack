@@ -20,6 +20,8 @@ namespace ActivityTrack
     /// </summary>
     public abstract class GenericResponse<T> : IHttpActionResult
     {
+        public const string ResultPropertyName = "result";
+
         /// <summary>
         /// A stopwatch that should be started as soon as possible and used to set the duration of IResponseObject after _getResponseMethod is executed
         /// </summary>
@@ -43,19 +45,17 @@ namespace ActivityTrack
         /// </summary>
         protected object _responseObject;
 
-        protected string _wrapperPropertyName;
 
         /// <summary>
         /// Creates a new instace and starts a new _stopwatch 
         /// </summary>
         /// <param name="request">The request for which the HttpResponseMessage is needed</param>
         /// <param name="getResponseMethod">The method that gets called in ExecuteAsync and whose return value will populate the result object in the json</param>
-        public GenericResponse(HttpRequestMessage request, Func<T> getResponseMethod = null, string wrapperPropertyName = null)
+        public GenericResponse(HttpRequestMessage request, Func<T> getResponseMethod = null)
         {
             _stopwatch = Stopwatch.StartNew();
             _requestMessage = request;
             _getResponseMethod = getResponseMethod;
-            _wrapperPropertyName = wrapperPropertyName;
         }
 
         /// <summary>
@@ -85,7 +85,6 @@ namespace ActivityTrack
             {
                 return Task.FromResult(CreateErrorResponseForException(ex));
             }
-
         }
 
         /// <summary>
@@ -100,15 +99,11 @@ namespace ActivityTrack
             }
             _responseObject = _getResponseMethod();
 
-            if (!string.IsNullOrEmpty( _wrapperPropertyName))
-            {
-                // wrap response object around a property 
-                var x = new ExpandoObject() as IDictionary<string, Object>;
-                x.Add(_wrapperPropertyName, _responseObject);
-                _responseObject = x;
-            }
+            // wrap response object around a property 
+            var result = new ExpandoObject() as IDictionary<string, Object>;
+            result.Add(ResultPropertyName, _responseObject); // set up the result property
 
-            var jsonContent = new JsonContent(_responseObject, _contractResolver);
+            var jsonContent = new JsonContent(result, _contractResolver);
 
             var response = new HttpResponseMessage()
             {

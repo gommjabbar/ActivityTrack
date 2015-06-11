@@ -18,9 +18,9 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/projects")]
-        public JsonNamedCollectionResponse<project> GetAll()
+        public JsonCollectionResponse<project> GetAll()
         {
-            return new JsonNamedCollectionResponse<project>(Request, () =>
+            return new JsonCollectionResponse<project>(Request, () =>
             {
                 var allProjectsEO = _pr.Get();
 
