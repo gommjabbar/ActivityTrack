@@ -18,13 +18,15 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/projects")]
-        public IHttpActionResult GetAll()
+        public JsonNamedCollectionResponse<project> GetAll()
         {
-            var allProjectsEO = _pr.Get();
+            return new JsonNamedCollectionResponse<project>(Request, () =>
+            {
+                var allProjectsEO = _pr.Get();
 
-            List<project> allProjectsDTO = allProjectsEO.Select(Mapper.Map<project>).ToList();
+                return allProjectsEO.Select(Mapper.Map<project>).ToList();
 
-            return Json(allProjectsDTO);
+            }, "projects");
         }
 
 
@@ -36,17 +38,14 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/projects/{id}")]
-        public IHttpActionResult Get(int id)
+        public JsonResponse<project> Get(int id)
         {
-            var projectEO = _pr.GetById(id);
-
-            if (projectEO == null)
+            return new JsonResponse<project>(Request, () =>
             {
-                return BadRequest("no project with given id "+id);
-            }
-            var projectDTO = Mapper.Map<project>(projectEO);
+                var projectEO = _pr.GetById(id);
 
-            return Json(projectDTO);
+                return Mapper.Map<project>(projectEO);
+            });
         }
 
 
@@ -58,16 +57,19 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("api/projects")]
-        public IHttpActionResult Add(project projectDTO)
+        public JsonResponse<project> Add(project projectDTO)
         {
-            var projectEO = Mapper.Map<ProjectEO>(projectDTO);
-            if (!ModelState.IsValid)
+            return new JsonResponse<project>(Request, () =>
             {
-                return BadRequest(ModelState);
-            }
+                var projectEO = Mapper.Map<ProjectEO>(projectDTO);
 
-            _pr.Insert(projectEO);
-            return Json(projectDTO);
+                if (ModelState.IsValid)
+                {
+                    _pr.Insert(projectEO);
+                }
+
+                return Mapper.Map<project>(projectEO);
+            });
         }
 
         /// <summary>
@@ -78,17 +80,19 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("api/projects")]
-        public IHttpActionResult Update(project projectDTO)
+        public JsonResponse<project> Update(project projectDTO)
         {
-            var projectEO = Mapper.Map<ProjectEO>(projectDTO);
-            if (!ModelState.IsValid)
+            return new JsonResponse<project>(Request, () =>
             {
-                return BadRequest(ModelState);
-            }
+                var projectEO = Mapper.Map<ProjectEO>(projectDTO);
 
-            _pr.Update(projectEO);
+                if (ModelState.IsValid)
+                {
+                    _pr.Update(projectEO);
+                }
 
-            return Json(projectDTO);
+                return Mapper.Map<project>(projectEO);
+            });
         }
 
     }

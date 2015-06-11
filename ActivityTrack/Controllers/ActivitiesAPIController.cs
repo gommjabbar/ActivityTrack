@@ -29,7 +29,6 @@ namespace ActivityTrack.Controllers
                     return activitiesEO.Select(Mapper.Map<activity>).ToList();
 
                 },"activities");
-            
         }
 
 
@@ -41,18 +40,14 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/projects/{projectId}/activities")]
-        public IHttpActionResult GetActivitiesOfProject(int projectId)
+        public JsonNamedCollectionResponse<activity> GetActivitiesOfProject(int projectId)
         {
-            var activitiesEO = _activityRepository.ProjectActivities(projectId);
-
-            List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
-
-            if (activitiesDTO.Count == 0)
+            return new JsonNamedCollectionResponse<activity>(Request, () =>
             {
-                return BadRequest("no activities for project with id "+projectId);
-            }
+                var activitiesEO = _activityRepository.ProjectActivities(projectId);
+                return activitiesEO.Select(Mapper.Map<activity>).ToList();
 
-            return Json(activitiesDTO);
+            }, "activities");
         }
 
 
@@ -64,18 +59,14 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/activities/{activityId}")]
-        public IHttpActionResult GetActivity(int activityId)
+        public JsonResponse<activity> GetActivity(int activityId)
         {
-            var activityEO = _activityRepository.GetById(activityId);
-
-            if (activityEO == null)
+            return new JsonResponse<activity>(Request, () =>
             {
-                return BadRequest("no project with given id " + activityId);
-            }
+                var activityEO = _activityRepository.GetById(activityId);
 
-            var activityDTO = Mapper.Map<activity>(activityEO);
-
-            return Json(activityDTO);
+                return Mapper.Map<activity>(activityEO);
+            });
         }
 
 
@@ -88,18 +79,15 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("api/activities")]
-        public IHttpActionResult GetFromTo(int offset, int length)
+        public JsonNamedCollectionResponse<activity> GetFromTo(int offset, int length)
         {
-            var activitiesEO = _activityRepository.GetFromTo(offset, length);
-
-            List<activity> activitiesDTO = activitiesEO.Select(Mapper.Map<activity>).ToList();
-
-            if (activitiesDTO.Count == 0)
+            return new JsonNamedCollectionResponse<activity>(Request, () =>
             {
-                return BadRequest("no activities with id between ["+offset+"; "+(offset+length)+")");
-            }
+                var activitiesEO = _activityRepository.GetFromTo(offset, length);
 
-            return Json(activitiesDTO);
+                return activitiesEO.Select(Mapper.Map<activity>).ToList();
+
+            }, "activities");
         }
 
 
@@ -111,27 +99,26 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("api/activities")]
-        public IHttpActionResult Add(activity activityDTO)
+        public JsonResponse<activity> Add(activity activityDTO)
         {
-            ActivityEO activityEO = Mapper.Map<ActivityEO>(activityDTO);
-
-            if (activityEO.ProjectId == 0)
+            return new JsonResponse<activity>(Request, () =>
             {
-                activityEO.ProjectId = activityEO.Project.Id;
-                activityEO.Project = null;
-            }
- 
-            activityEO.ActivityState = Models.IdEnums.ActivityStateIds.New;
+                ActivityEO activityEO = Mapper.Map<ActivityEO>(activityDTO);
 
-            if (!ModelState.IsValid)
-            {
-                 return BadRequest(ModelState);
-            }
-            
-            _activityRepository.Insert(activityEO);
+                if (activityEO.ProjectId == 0)
+                {
+                    activityEO.ProjectId = activityEO.Project.Id;
+                    activityEO.Project = null;
+                }
 
-            return Json(activityDTO);
+                activityEO.ActivityState = Models.IdEnums.ActivityStateIds.New;
+
+                _activityRepository.Insert(activityEO);
+
+                return Mapper.Map<activity>(activityEO);
+            });
         }
+
 
         /// <summary>
         /// This method will update the given activity as parametter, setting state to Started
@@ -141,26 +128,31 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("api/activities/start")]
-        public IHttpActionResult StartActivity(activity activityDTO)
+        public JsonResponse<activity> StartActivity(activity activityDTO)
         {
-            var activityEO = _activityRepository.Get().ToList().First(a => a.Id == activityDTO.id);
-
-            if (activityEO.ActivityState != Models.IdEnums.ActivityStateIds.Started)
+            return new JsonResponse<activity>(Request, () =>
             {
+                var activityEO = _activityRepository.Get().ToList().First(a => a.Id == activityDTO.id);
 
-                activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Started;
+                if (activityEO.ActivityState != Models.IdEnums.ActivityStateIds.Started)
+                {
 
-                _activityRepository.Update(activityEO);
+                    activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Started;
 
-                var time = new TimeEO();
-                time.StartDate = DateTimeOffset.Now;
-                time.ActivityId = activityEO.Id;
+                    _activityRepository.Update(activityEO);
 
-                _timeRepository.Insert(time);
+                    var time = new TimeEO();
 
-                return Json(activityDTO);
-            }
-            return BadRequest();
+                    time.StartDate = DateTimeOffset.Now;
+
+                    time.ActivityId = activityEO.Id;
+
+                    _timeRepository.Insert(time);
+
+                }
+
+                return Mapper.Map<activity>(activityEO);
+            });
         }
 
 
@@ -172,24 +164,26 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("api/activities/pause")]
-        public IHttpActionResult PauseActivity(activity activityDTO)
+        public JsonResponse<activity> PauseActivity(activity activityDTO)
         {
-            var activityEO = _activityRepository.Get().ToList().First(a => a.Id == activityDTO.id);
-
-            if (activityEO.ActivityState == Models.IdEnums.ActivityStateIds.Started)
+            return new JsonResponse<activity>(Request, () =>
             {
-                var last = _timeRepository.Get().ToList().Last(time => time.ActivityId == activityEO.Id);
-                last.EndDate = DateTimeOffset.Now;
-                _timeRepository.Update(last);
+                var activityEO = _activityRepository.Get().ToList().First(a => a.Id == activityDTO.id);
 
-                activityEO.UpdateDate = DateTimeOffset.Now;
-                activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Paused;
-                activityEO.ElapsedTime = _timeRepository.ElapsedTimeById(activityEO.Id);
-                _activityRepository.Update(activityEO);
+                if (activityEO.ActivityState == Models.IdEnums.ActivityStateIds.Started)
+                {
+                    var last = _timeRepository.Get().ToList().Last(time => time.ActivityId == activityEO.Id);
+                    last.EndDate = DateTimeOffset.Now;
+                    _timeRepository.Update(last);
 
-                return Json(activityDTO);
-            }
-            return BadRequest();
+                    activityEO.UpdateDate = DateTimeOffset.Now;
+                    activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Paused;
+                    activityEO.ElapsedTime = _timeRepository.ElapsedTimeById(activityEO.Id);
+                    _activityRepository.Update(activityEO);
+                }
+
+                return Mapper.Map<activity>(activityEO);
+            });
         }
 
 
@@ -201,32 +195,34 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("api/activities/end")]
-        public IHttpActionResult EndActivity(activity activityDTO)
+        public JsonResponse<activity> EndActivity(activity activityDTO)
         {
-            var activityEO = _activityRepository.Get().ToList().First(a => a.Id == activityDTO.id);
-
-            if (activityEO.ActivityState == Models.IdEnums.ActivityStateIds.Started)
+            
+            return new JsonResponse<activity>(Request, () =>
             {
-                var last = _timeRepository.Get().ToList().Last(time => time.ActivityId == activityEO.Id);
+                var activityEO = _activityRepository.Get().ToList().First(a => a.Id == activityDTO.id);
 
-                last.EndDate = DateTimeOffset.Now;
+                if (activityEO.ActivityState == Models.IdEnums.ActivityStateIds.Started)
+                {
+                    var last = _timeRepository.Get().ToList().Last(time => time.ActivityId == activityEO.Id);
 
-                _timeRepository.Update(last);
+                    last.EndDate = DateTimeOffset.Now;
 
-                activityEO.ElapsedTime = _timeRepository.ElapsedTimeById(activityEO.Id);
-            }
+                    _timeRepository.Update(last);
 
-            if (activityEO.ActivityState != Models.IdEnums.ActivityStateIds.Ended)
-            {
+                    activityEO.ElapsedTime = _timeRepository.ElapsedTimeById(activityEO.Id);
+                }
 
-                activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Ended;
+                if (activityEO.ActivityState != Models.IdEnums.ActivityStateIds.Ended)
+                {
 
-                _activityRepository.Update(activityEO);
+                    activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Ended;
 
-                return Json(activityDTO);
-            }
+                    _activityRepository.Update(activityEO);
+                }
 
-            return BadRequest();
+                return Mapper.Map<activity>(activityEO);
+            });
         }
 
         /// <summary>
@@ -237,18 +233,19 @@ namespace ActivityTrack.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("api/activities")]
-        public IHttpActionResult Update(activity activityDTO)
+        public JsonResponse<activity> Update(activity activityDTO)
         {
-            var activityEO = Mapper.Map<ActivityEO>(activityDTO);
-
-            if (!ModelState.IsValid)
+            return new JsonResponse<activity>(Request, () =>
             {
-                return BadRequest(ModelState);
-            }
+                var activityEO = Mapper.Map<ActivityEO>(activityDTO);
 
-            _activityRepository.Update(activityEO);
-            
-            return Json(activityDTO);
+                if (ModelState.IsValid)
+                {
+                    _activityRepository.Update(activityEO);
+                }
+
+                return Mapper.Map<activity>(activityEO);
+            });
         }
     }
 }
