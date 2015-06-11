@@ -28,7 +28,7 @@ namespace ActivityTrack.Controllers
 
                     return activitiesEO.Select(Mapper.Map<activity>).ToList();
 
-                },"activities");
+                });
         }
 
 
@@ -110,6 +110,31 @@ namespace ActivityTrack.Controllers
                     activityEO.ProjectId = activityEO.Project.Id;
                     activityEO.Project = null;
                 }
+
+                activityEO.ActivityState = Models.IdEnums.ActivityStateIds.New;
+
+                _activityRepository.Insert(activityEO);
+
+                return Mapper.Map<activity>(activityEO);
+            });
+        }
+
+
+        [HttpPost]
+        [Route("api/activities/clone")]
+        public JsonResponse<activity> CloneActivity(activity activityDTO)
+        {
+            return new JsonResponse<activity>(Request, () =>
+            {
+                ActivityEO activityEO = Mapper.Map<ActivityEO>(activityDTO);
+
+                if (activityEO.ProjectId == 0)
+                {
+                    activityEO.ProjectId = activityEO.Project.Id;
+                    activityEO.Project = null;
+                }
+
+                activityEO.EndDate = null;
 
                 activityEO.ActivityState = Models.IdEnums.ActivityStateIds.New;
 

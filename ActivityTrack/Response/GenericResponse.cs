@@ -45,6 +45,10 @@ namespace ActivityTrack
         /// </summary>
         protected object _responseObject;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string ErrorMsg;
 
         /// <summary>
         /// Creates a new instace and starts a new _stopwatch 
@@ -56,6 +60,7 @@ namespace ActivityTrack
             _stopwatch = Stopwatch.StartNew();
             _requestMessage = request;
             _getResponseMethod = getResponseMethod;
+            ErrorMsg = null;
         }
 
         /// <summary>
@@ -116,6 +121,7 @@ namespace ActivityTrack
 
         protected virtual HttpResponseMessage CreateErrorResponseForException(Exception ex)
         {
+            ErrorMsg = ex.Message;
             return new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.InternalServerError,

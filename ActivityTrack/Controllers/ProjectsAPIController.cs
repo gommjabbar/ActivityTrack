@@ -25,8 +25,7 @@ namespace ActivityTrack.Controllers
                 var allProjectsEO = _pr.Get();
 
                 return allProjectsEO.Select(Mapper.Map<project>).ToList();
-
-            }, "projects");
+            });
         }
 
 

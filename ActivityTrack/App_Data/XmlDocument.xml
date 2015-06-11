@@ -612,7 +612,12 @@
             The response object of the function _getResponseMethod
             </summary>
         </member>
-        <member name="M:ActivityTrack.GenericResponse`1.#ctor(System.Net.Http.HttpRequestMessage,System.Func{`0},System.String)">
+        <member name="F:ActivityTrack.GenericResponse`1.ErrorMsg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ActivityTrack.GenericResponse`1.#ctor(System.Net.Http.HttpRequestMessage,System.Func{`0})">
             <summary>
             Creates a new instace and starts a new _stopwatch 
             </summary>
@@ -662,7 +667,7 @@
             Metoda care nu se foloseste si deci nu este implementata.
             </summary>
         </member>
-        <member name="P:ActivityTrack.JsonNamedCollectionResponse`1.Result">
+        <member name="P:ActivityTrack.JsonCollectionResponse`1.Result">
             <summary>
             Named result
             </summary>
