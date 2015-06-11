@@ -79,20 +79,24 @@
     </form>
 
     <form>
-        <label class="col-md-3">
-            <input type="radio" ng-model="selectedState.activityState" name="radio" value="null">
+        <label class="col-md-2">
+            <input type="radio" ng-model="selectedState.activityState" name="radioBtn" >
             All Activities
         </label>
         <label class="col-md-3">
-            <input type="radio" ng-model="selectedState.activityState" name="radio" value="1">
+            <input type="radio" ng-model="selectedState.activityState" name="radioBtn" value="0" >
+            Pending Activities
+        </label>
+        <label class="col-md-2">
+            <input type="radio" ng-model="selectedState.activityState" name="radioBtn" value="1">
             Started Activities
         </label>
         <label class="col-md-3">
-            <input type="radio" ng-model="selectedState.activityState" name="radio" value="2">
+            <input type="radio" ng-model="selectedState.activityState" name="radioBtn" value="2">
             Paused Projects
         </label>
-        <label class="col-md-3">
-            <input type="radio" ng-model="selectedState.activityState" name="radio" value="3">
+        <label class="col-md-2">
+            <input type="radio" ng-model="selectedState.activityState" name="radioBtn" value="3">
             Ended Activities
         </label>
     </form>
