@@ -16,8 +16,6 @@
              $scope.ResumeButton = 'Resume';
 
              $scope.startActivity = function (item) {
-                 $scope.timerActive = true;
-                 $scope.timerRunning = true;
                  $.ajax(
                 {
                     url: '/api/activities/start',
@@ -30,7 +28,6 @@
              };
 
              $scope.pauseActivity = function (item) {
-                 $scope.timerRunning = false;
                      $.ajax(
                      {
                          url: '/api/activities/pause',
@@ -43,7 +40,6 @@
              };
 
              $scope.resumeActivity = function (item) {
-                 $scope.timerRunning = true;
                      $.ajax(
                      {
                          url: '/api/activities/start',
@@ -57,7 +53,6 @@
 
              $scope.endActivity = function (item)
              {
-                 $scope.timerActive = false;
                      $.ajax(
                      {
                          url: '/api/activities/end',
@@ -66,6 +61,17 @@
                      }).done(function (data) {
                          $scope.$apply();
                          $scope.getActivities();
+                     })
+                     $.ajax(
+                     {
+                         url: '/api/activities/clone',
+                         type: 'post',
+                         data: item
+                     }).done(function (data) {
+                         $scope.$apply();
+                         $scope.getActivities();
+                     }).error(function (error) {
+                         alert(error)
                      })
              };
 
@@ -85,14 +91,14 @@
                      $scope.$apply();
                  })
              };
-
+                
              $scope.getActivities = function () {
                  $.ajax(
                  {
                      url: '/api/activities',
                      type: 'get',
                  }).done(function (data) {
-                     $scope.Activities = data;
+                     $scope.Activities = data.result;
                      $scope.$apply();
                  })
              }

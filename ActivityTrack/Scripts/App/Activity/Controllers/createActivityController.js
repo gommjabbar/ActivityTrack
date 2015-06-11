@@ -9,7 +9,7 @@
              });
 
              $scope.activity = {    
-                 endDate: $scope.endDate,
+                 endDate: $scope.endDate,  
              }
 
              $scope.updateProjectId = function()
@@ -26,11 +26,9 @@
                  }).done(function (data) {
                      $scope.$apply();
                      $scope.getActivities();
-                     //window.location.replace("/Activity/Index");
                  }).error(function (error) {
                      alert(error)
                  })
              }
-
          }]);
 })();

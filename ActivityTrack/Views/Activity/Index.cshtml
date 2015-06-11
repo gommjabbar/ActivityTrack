@@ -78,6 +78,25 @@
         </div>
     </form>
 
+    <form>
+        <label class="col-md-3">
+            <input type="radio" ng-model="selectedState.activityState" name="radio" value="null">
+            All Activities
+        </label>
+        <label class="col-md-3">
+            <input type="radio" ng-model="selectedState.activityState" name="radio" value="1">
+            Started Activities
+        </label>
+        <label class="col-md-3">
+            <input type="radio" ng-model="selectedState.activityState" name="radio" value="2">
+            Paused Projects
+        </label>
+        <label class="col-md-3">
+            <input type="radio" ng-model="selectedState.activityState" name="radio" value="3">
+            Ended Activities
+        </label>
+    </form>
+
     <table st-table="Activities" class="table table-bordered">
         <tr>
             <th class="col-md-2">
@@ -103,7 +122,7 @@
         </tr>
 
         <tbody>
-            <tr ng-repeat="activity in Activities | filter:search | orderBy:predicate:reverse ">
+            <tr ng-repeat="activity in Activities | filter:selectedState | filter:search | orderBy:predicate:reverse ">
                 <td>
                     <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{activity.project.name}}</span>
                     <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.project.name" ng-blur="doneEditing(activity)" autofocus />
@@ -131,8 +150,8 @@
                     </button>
                 </td>
                 <td>
-                    <span >{{ activity.elapsedTime/60 | number:0 }} minute(s) {{ activity.elapsedTime | number:2}}</span>
-                   
+                    <span>{{ activity.elapsedTime%60 | number:0 }} minute(s) {{ activity.elapsedTime | number:2}}</span>
+
                 </td>
             </tr>
         </tbody>

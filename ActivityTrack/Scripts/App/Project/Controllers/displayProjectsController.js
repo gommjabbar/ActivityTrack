@@ -10,9 +10,8 @@
                      url: '/api/projects',
                      type: 'get',
                  }).done(function (data) {
-                     $scope.Projects = data;
-                    // $scope.$apply();
-                     $scope.$digest();
+                     $scope.Projects = data.result;
+                     $scope.$apply();
                  })
              }
              $scope.getProjects();
