@@ -251,12 +251,17 @@
     <Compile Include="Migrations\201506091947024_DueDate.Designer.cs">
       <DependentUpon>201506091947024_DueDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506111001330_addedEstimation.cs" />
+    <Compile Include="Migrations\201506111001330_addedEstimation.Designer.cs">
+      <DependentUpon>201506111001330_addedEstimation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityEO.cs" />
     <Compile Include="Models\ActivityTypeEO.cs" />
     <Compile Include="DTO\activity.cs" />
     <Compile Include="Models\BaseEntity.cs" />
+    <Compile Include="Models\Estimation.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdEnums\ActivityStateIds.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -1287,6 +1292,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506091947024_DueDate.resx">
       <DependentUpon>201506091947024_DueDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506111001330_addedEstimation.resx">
+      <DependentUpon>201506111001330_addedEstimation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

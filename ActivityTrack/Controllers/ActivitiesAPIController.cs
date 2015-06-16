@@ -105,6 +105,11 @@ namespace ActivityTrack.Controllers
             {
                 ActivityEO activityEO = Mapper.Map<ActivityEO>(activityDTO);
 
+                if (activityEO.EstimatedEffort == null)
+                {
+                    activityEO.EstimatedEffort = 0;
+                }
+
                 if (activityEO.ProjectId == 0)
                 {
                     activityEO.ProjectId = activityEO.Project.Id;
@@ -124,24 +129,10 @@ namespace ActivityTrack.Controllers
         [Route("api/activities/clone")]
         public JsonResponse<activity> CloneActivity(activity activityDTO)
         {
-            return new JsonResponse<activity>(Request, () =>
-            {
-                ActivityEO activityEO = Mapper.Map<ActivityEO>(activityDTO);
-
-                if (activityEO.ProjectId == 0)
-                {
-                    activityEO.ProjectId = activityEO.Project.Id;
-                    activityEO.Project = null;
-                }
-
-                activityEO.EndDate = null;
-
-                activityEO.ActivityState = Models.IdEnums.ActivityStateIds.New;
-
-                _activityRepository.Insert(activityEO);
-
-                return Mapper.Map<activity>(activityEO);
-            });
+            activityDTO.type = null;
+            activityDTO.endDate = null;
+            activityDTO.elapsedTime = 0;
+            return Add(activityDTO);
         }
 
 
@@ -172,6 +163,11 @@ namespace ActivityTrack.Controllers
 
                     time.ActivityId = activityEO.Id;
 
+                    if (activityEO.EstimatedEffort != 0)
+                    {
+                        time.EndDate = time.StartDate.AddMinutes(activityEO.EstimatedEffort);
+                    }
+
                     _timeRepository.Insert(time);
 
                 }
@@ -197,10 +193,13 @@ namespace ActivityTrack.Controllers
 
                 if (activityEO.ActivityState == Models.IdEnums.ActivityStateIds.Started)
                 {
+
                     var last = _timeRepository.Get().ToList().Last(time => time.ActivityId == activityEO.Id);
                     last.EndDate = DateTimeOffset.Now;
                     _timeRepository.Update(last);
 
+
+                    activityEO.EstimatedEffort = 0;
                     activityEO.UpdateDate = DateTimeOffset.Now;
                     activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Paused;
                     activityEO.ElapsedTime = _timeRepository.ElapsedTimeById(activityEO.Id);
@@ -240,7 +239,8 @@ namespace ActivityTrack.Controllers
 
                 if (activityEO.ActivityState != Models.IdEnums.ActivityStateIds.Ended)
                 {
-
+                    activityEO.EstimatedEffort = 0;
+                    activityEO.UpdateDate = DateTimeOffset.Now;
                     activityEO.ActivityState = Models.IdEnums.ActivityStateIds.Ended;
 
                     _activityRepository.Update(activityEO);

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ActivityTrack.Models
 {
     [Table("Activities")]
-    public class ActivityEO: BaseEntity
+    public class ActivityEO: Estimation
     {
         public int Id { get; set; }
 
