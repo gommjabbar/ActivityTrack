@@ -105,10 +105,7 @@ namespace ActivityTrack.Controllers
             {
                 ActivityEO activityEO = Mapper.Map<ActivityEO>(activityDTO);
 
-                if (activityEO.EstimatedEffort == null)
-                {
-                    activityEO.EstimatedEffort = 0;
-                }
+                activityEO.EstimatedEffort = 100;
 
                 if (activityEO.ProjectId == 0)
                 {
@@ -131,6 +128,7 @@ namespace ActivityTrack.Controllers
         {
             activityDTO.type = null;
             activityDTO.endDate = null;
+            activityDTO.project = null;
             activityDTO.elapsedTime = 0;
             return Add(activityDTO);
         }
@@ -228,11 +226,15 @@ namespace ActivityTrack.Controllers
 
                 if (activityEO.ActivityState == Models.IdEnums.ActivityStateIds.Started)
                 {
-                    var last = _timeRepository.Get().ToList().Last(time => time.ActivityId == activityEO.Id);
+                    if (activityEO.EstimatedEffort == 0)
+                    {
+                        var last = _timeRepository.Get().ToList().Last(time => time.ActivityId == activityEO.Id);
 
-                    last.EndDate = DateTimeOffset.Now;
+                        last.EndDate = DateTimeOffset.Now;
 
-                    _timeRepository.Update(last);
+                        _timeRepository.Update(last);
+                    }
+
 
                     activityEO.ElapsedTime = _timeRepository.ElapsedTimeById(activityEO.Id);
                 }
