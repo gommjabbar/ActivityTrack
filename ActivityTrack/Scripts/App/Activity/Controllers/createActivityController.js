@@ -8,6 +8,19 @@
                  $('#datepicker').datetimepicker();
              });
 
+             $scope.timeUnits = ["Hours","Minutes"]
+             $scope.unit = $scope.timeUnits[0];
+
+             $(".estimate").hide();
+             $(".showHideEstimate").click(function () {
+                 if ($(this).is(":checked")) {
+                     $(".estimate").show();
+                 } else {
+                     $(".estimate").hide();
+                 }
+             });
+
+
              $scope.activity = {    
                  endDate: $scope.endDate,  
              }

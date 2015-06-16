@@ -24,10 +24,27 @@
                         <label for="endDate">Due Date</label>
                         <div>
                             <input type="text" id="datepicker" ng-model="activity.endDate" style="width: 160px" />
-                            <pre>Date is: <em>{{activity.endDate}}</em></pre>
+                            @*<pre>Date is: <em>{{activity.endDate}}</em></pre>*@
                         </div>
                     </div>
 
+                    <div class="progress-box">
+                        <label for=estimatedTime>Estimated time</label>
+                        <input class="showHideEstimate" type="checkbox" name="estimate" value="1" />
+                        <div class="estimate">
+                            <div class="percentage-cur" ng-init="activity.estimatedTime=50">
+                                <span class="num">{{ activity.estimatedTime }}</span>
+                                <select ng-model="unit"
+                                        ng-options="unit for unit in timeUnits"
+                                        style="width: 80px; height: 25px; margin-left:auto "></select>
+                            </div>
+
+                            <div class="progress-bar progress-bar-slider">
+                                <input class="progress-slider" type="range" min="0" max="100" ng-model="activity.estimatedTime" id=estimatedtime step="10">
+                                <div class="inner" ng-style="{ width: activity.estimatedTime + '%' || '0%' }"></div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="description">Description</label>
@@ -43,7 +60,9 @@
                                 <select ng-model="activity.project"
                                         ng-options="project.name for project in Projects track by project.id"
                                         ng-change="updateProject()"
-                                        style="width: 160px; height: 25px; "></select>
+                                        style="width: 160px; height: 25px; ">
+                                    <option value="" ng-if="false"></option>
+                                </select>
                             </div>
                             <div>
                                 <input class="btn btn-default" type="button" id="btnShowNewProject" value="{{newProjectButtonText}}" ng-click="showHide()" />
@@ -80,11 +99,11 @@
 
     <form>
         <label class="col-md-2">
-            <input type="radio" ng-model="selectedState.activityState" name="radioBtn" >
+            <input type="radio" ng-model="selectedState.activityState" name="radioBtn">
             All Activities
         </label>
         <label class="col-md-3">
-            <input type="radio" ng-model="selectedState.activityState" name="radioBtn" value="0" >
+            <input type="radio" ng-model="selectedState.activityState" name="radioBtn" value="0">
             Pending Activities
         </label>
         <label class="col-md-2">
