@@ -8,7 +8,7 @@
                  $('#datepicker').datetimepicker();
              });
 
-             $scope.timeUnits = ["Hours","Minutes"]
+             $scope.timeUnits = ["Minutes","Hours"]
              $scope.unit = $scope.timeUnits[0];
 
              $(".estimate").hide();
@@ -19,7 +19,6 @@
                      $(".estimate").hide();
                  }
              });
-
 
              $scope.activity = {    
                  endDate: $scope.endDate,  
