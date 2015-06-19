@@ -20,8 +20,18 @@
                  }
              });
 
-             $scope.activity = {    
-                 endDate: $scope.endDate,  
+             $scope.activity = {
+                 //description: "asdasda",
+                 //project: {id:1 , name:"dayum"}
+             }
+
+             $scope.modalCond = function () {
+                 if ($("#descriptionBox").val().length > 0) {
+                     $scope.addActivity();
+                 }
+                 else {
+                     $('#myModal').modal();
+                 }
              }
 
              $scope.updateProjectId = function()
@@ -38,9 +48,11 @@
                  }).done(function (data) {
                      $scope.$apply();
                      $scope.getActivities();
+                     $scope.getProject();
                  }).error(function (error) {
                      alert(error)
                  })
              }
+             
          }]);
 })();

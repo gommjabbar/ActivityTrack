@@ -10,6 +10,16 @@
                  $scope.predicate = predicate;
              };
 
+             $scope.selectedRow = null;  
+             $scope.setClickedRow = function (id) {  
+                 $scope.selectedRow = id;
+             }
+
+             $scope.setProject = function (project) {
+                 $scope.selectedProject = project;
+                 $scope.activity.project = project;
+             }
+
              $scope.StartButton = 'Start';
              $scope.PauseButton = 'Pause';
              $scope.EndButton = 'End';

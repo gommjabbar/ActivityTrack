@@ -84,3 +84,9 @@ textarea {
   cursor: pointer;
   z-index: 1;
 }
+
+.selected {
+    background-color:cadetblue;
+    color:white;
+    font-weight:bold;
+}

@@ -8,9 +8,7 @@
 
 
 <div class="container" ng-controller="displayActivitiesController">
-
-    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add a new activity</button>
-
+    
     <div id="myModal" class="modal fade" role="dialog" ng-controller="createActivityController">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -24,14 +22,13 @@
                         <label for="endDate">Due Date</label>
                         <div>
                             <input type="text" id="datepicker" ng-model="activity.endDate" style="width: 160px" />
-                            @*<pre>Date is: <em>{{activity.endDate}}</em></pre>*@
                         </div>
                     </div>
 
                     <div class="progress-box">
                         <label for=estimatedTime>Estimated time</label>
-                        <input class="showHideEstimate" type="checkbox" name="estimate" value="1"  />
-                        <fieldset class="estimate" >
+                        <input class="showHideEstimate" type="checkbox" name="estimate" value="1" />
+                        <fieldset class="estimate">
                             <div class="percentage-cur" ng-init="activity.estimatedTime=60">
                                 <div class="col-md-6">
                                     <span class="num">{{ activity.estimatedTime }}</span>
@@ -124,63 +121,87 @@
         </label>
     </form>
 
-    <table st-table="Activities" class="table table-bordered">
-        <tr>
-            <th class="col-md-2">
-                <a href="" ng-click="order('project.name')"> Project</a>
-                <span class="sortorder" ng-show="predicate === 'Project'" ng-class="{reverse:reverse}"></span>
-            </th>
-            <th class="col-md-2">
-                <a href="" ng-click="order('endDate')"> Due Date</a>
-                <span class="sortorder" ng-show="predicate === 'Due Date'" ng-class="{reverse:reverse}"></span>
-            </th>
-            <th class="col-md-4">
-                <a href="" ng-click="order('description')"> Description</a>
-                <span class="sortorder" ng-show="predicate === 'Description'" ng-class="{reverse:reverse}"></span>
-            </th>
-            <th class="col-md-2">
-                <a href="" ng-click="order('State')"> State</a>
-                <span class="sortorder" ng-show="predicate === 'State'" ng-class="{reverse:reverse}"></span>
-            </th>
-            <th class="col-md-2">
-                <a href="" ng-click="order('Elapsed Time')"> Elapsed Time</a>
-                <span class="sortorder" ng-show="predicate === 'Elapsed Time'" ng-class="{reverse:reverse}"></span>
-            </th>
-        </tr>
+    <div class="row-fluid" ng-model="activity.project" ng-init="activity.project='nah'">
+        {{activity.project}}
+        <div class="col-xs-2">
+            <div class="table-responsive">
+                <table st-table="Projects" class="table table-bordered" ng-controller="displayProjectsController">
+                    <tr>
+                        <th class="col-md-2" >
+                            <a href="" ng-click="order('name')"> Projects </a>
+                            <span class="sortorder" ng-show="predicate === 'Project'" ng-class="{reverse:reverse}"></span>
+                        </th>
+                    </tr>
 
-        <tbody>
-            <tr ng-repeat="activity in Activities | filter:selectedState | filter:search | orderBy:predicate:reverse ">
-                <td>
-                    <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{activity.project.name}}</span>
-                    <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.project.name" ng-blur="doneEditing(activity)" autofocus />
-                </td>
-                <td>
-                    <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{ activity.endDate | date: 'yyyy-MM-dd HH:mm' }}</span>
-                    <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.endDate" ng-blur="doneEditing(activity)" autofocus />
-                </td>
-                <td>
-                    <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{ activity.description }}</span>
-                    <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.description" required ng-blur="doneEditing(activity)" autofocus />
-                </td>
-                <td>
-                    <button ng-click="startActivity(activity)" ng-show="activity.activityState==0 || activity.activityState==3">
-                        {{StartButton}}
-                    </button>
-                    <button ng-click="pauseActivity(activity)" ng-show="activity.activityState==1">
-                        {{PauseButton}}
-                    </button>
-                    <button ng-click="endActivity(activity)" ng-show="activity.activityState==1">
-                        {{EndButton}}
-                    </button>
-                    <button ng-click="resumeActivity(activity)" ng-show="activity.activityState==2">
-                        {{ResumeButton}}
-                    </button>
-                </td>
-                <td>
-                    <span>{{ activity.elapsedTime%60 | number:0 }} minute(s) @*{{ activity.elapsedTime | number:2}}*@</span>
+                    <tbody>
+                        <tr ng-repeat="project in Projects | orderBy:predicate:reverse " ng-class="{'selected': project.id == selectedRow}" ng-click="setClickedRow(project.id)" >
+                            <td ng-click="setProject(project.id)" ng-model="activity.project" ng-init="$parent.activity.project='yeah'">
+                                {{project.name}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-10">
+            <div ng-controller="createActivityController">
+                <input type="text" id="descriptionBox" ng-model="activity.description" style="width: 400px;" />
+                <button id="openModal" type="button" class="btn btn-default" ng-click="modalCond()" style="margin:3px">Add a new activity</button>
+                @*<button id="openModal" type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" style="margin:3px">Add a new activity</button>*@
+            </div>
+            <div class="table-responsive">
+                <table st-table="Activities" class="table table-bordered">
+                    <tr>
+                        <th class="col-md-2">
+                            <a href="" ng-click="order('endDate')"> Due Date</a>
+                            <span class="sortorder" ng-show="predicate === 'Due Date'" ng-class="{reverse:reverse}"></span>
+                        </th>
+                        <th class="col-md-4">
+                            <a href="" ng-click="order('description')"> Description</a>
+                            <span class="sortorder" ng-show="predicate === 'Description'" ng-class="{reverse:reverse}"></span>
+                        </th>
+                        <th class="col-md-2">
+                            <a href="" ng-click="order('State')"> State</a>
+                            <span class="sortorder" ng-show="predicate === 'State'" ng-class="{reverse:reverse}"></span>
+                        </th>
+                        <th class="col-md-2">
+                            <a href="" ng-click="order('ElapsedTime')"> Elapsed Time</a>
+                            <span class="sortorder" ng-show="predicate === 'ElapsedTime'" ng-class="{reverse:reverse}"></span>
+                        </th>
+                    </tr>
 
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                    <tbody>
+                        <tr ng-repeat="activity in Activities | filter:selectedState | filter:selectedProject:true | orderBy:predicate:reverse ">
+                            <td>
+                                <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{ activity.endDate | date: 'yyyy-MM-dd HH:mm' }}</span>
+                                <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.endDate" ng-blur="doneEditing(activity)" autofocus />
+                            </td>
+                            <td>
+                                <span ng-hide="activity.editing" ng-dblclick="editItem(activity)">{{ activity.description }}</span>
+                                <input style="width: 160px;" ng-show="activity.editing" ng-model="activity.description" required ng-blur="doneEditing(activity)" autofocus />
+                            </td>
+                            <td>
+                                <button ng-click="startActivity(activity)" ng-show="activity.activityState==0 || activity.activityState==3">
+                                    {{StartButton}}
+                                </button>
+                                <button ng-click="pauseActivity(activity)" ng-show="activity.activityState==1">
+                                    {{PauseButton}}
+                                </button>
+                                <button ng-click="endActivity(activity)" ng-show="activity.activityState==1">
+                                    {{EndButton}}
+                                </button>
+                                <button ng-click="resumeActivity(activity)" ng-show="activity.activityState==2">
+                                    {{ResumeButton}}
+                                </button>
+                            </td>
+                            <td>
+                                <span>{{ activity.elapsedTime%60 | number:0 }} minute(s) @*{{ activity.elapsedTime | number:2}}*@</span>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
