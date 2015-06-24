@@ -1,0 +1,112 @@
+﻿@model ActivityTrack.Models.ActivityEO
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ActivityEO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ActivityType.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActivityType.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Project.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActivityState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActivityState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElapsedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElapsedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedEffort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedEffort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedStartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedStartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeleteDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeleteDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

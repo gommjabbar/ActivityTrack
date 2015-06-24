@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ActivityTrack.Models.ActivityEO>
+
+@* Memory usage n stuff *@
+
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript" src='~/Scripts/knockout-3.3.0.js'></script>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div>
+    <button type="button" class="btn btn-default" data-bind="click: addPeople">Add people</button>
+    <button type="button" class="btn btn-default" data-bind="click: showPeople">Show people</button>
+    <table>
+        <thead>
+            <tr><th>First name</th><th>Last name</th><th>About</th><th>Birth place</th></tr>
+        </thead>
+       
+
+    </table>
+    <div data-bind="if: showPeopleList, visible: showPeopleList">
+        <people-list params="PeopleArray: People"></people-list>
+    </div>
+</div>
+
+<script>
+
+    function PeopleViewModel() {
+        var self = this;
+        self.showPeopleList = ko.observable(false);
+        self.People = ko.observableArray(
+            [{ firstName: ko.observable('Bert'), lastName: ko.observable('Bertington'), aboutPerson: ko.observable('details'), birthPlace: ko.observable('cityName') },
+            { firstName: ko.observable('Charles'), lastName: ko.observable('Charlesforth'), aboutPerson: ko.observable('details'), birthPlace: ko.observable('cityName') },
+            { firstName: ko.observable('Denise'), lastName: ko.observable('Dentiste'), aboutPerson: ko.observable('details'), birthPlace: ko.observable('cityName') }])
+
+        self.addPeople = function () {
+            for (i = 1; i <= 1000; i++) {
+                self.People.push(
+                    {
+                        firstName: ko.observable("firstName" + i),
+                        lastName: ko.observable("lastName" + i),
+                        aboutPerson: ko.observable("aboutPerson" + i),
+                        birthPlace: ko.observable("birthPlace" + i),
+                    });
+            }
+        }
+        self.showPeople = function () {
+            self.showPeopleList(!self.showPeopleList());
+        }
+       
+            //  self.addPeople();
+    }
+
+    ko.components.register('people-list', {
+        viewModel: function (params) {
+            this.People = params.PeopleArray;
+        },
+        template: '<tbody data-bind="foreach: People">\
+        </tbody>'
+    })
+    ko.applyBindings(new PeopleViewModel());
+
+</script>

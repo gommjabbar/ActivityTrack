@@ -227,7 +227,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivitiesAPIController.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Controllers\ActivityListController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KnockoutActivitiesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ProjectsAPIController.cs" />
@@ -1274,6 +1276,16 @@
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\KnockoutActivities\Create.cshtml" />
+    <Content Include="Views\KnockoutActivities\Delete.cshtml" />
+    <Content Include="Views\KnockoutActivities\Details.cshtml" />
+    <Content Include="Views\KnockoutActivities\Edit.cshtml" />
+    <Content Include="Views\KnockoutActivities\Index.cshtml" />
+    <Content Include="Views\ActivityList\Create.cshtml" />
+    <Content Include="Views\ActivityList\Delete.cshtml" />
+    <Content Include="Views\ActivityList\Details.cshtml" />
+    <Content Include="Views\ActivityList\Edit.cshtml" />
+    <Content Include="Views\ActivityList\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

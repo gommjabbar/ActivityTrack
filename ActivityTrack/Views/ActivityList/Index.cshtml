@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ActivityTrack.Models.ActivityEO>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <script src="~/Scripts/knockout-3.3.0.js"></script>
+    <script src="~/Scripts/jquery-2.1.4.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="col-md-2">Project</th>
+                <th class="col-md-2">End Date</th>
+                <th class="col-md-2">Description</th>
+                <th class="col-md-2">Elapsed Time</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: activities">
+            <tr>
+                <td data-bind="text: project.name"></td>
+                <td data-bind="text: endDate"></td>
+                <td data-bind="text: description"></td>
+                <td data-bind="text: elapsedTime"></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <script type="text/javascript">
+
+        var activity = function (data) {
+            var self = this;
+            self.endDate = ko.observable(data.endDate);
+            self.description = ko.observable(data.description);
+            self.project = ko.observable(data.project);
+            self.elapsedTime = ko.observable(data.elapsedTime);
+        }
+
+        var activitiesVM = function () {
+            var self = this;
+            self.activities = ko.observableArray([]);
+            self.getData = function () {
+                $.getJSON("/api/activities", function (data) {
+                    self.activities(data.result);
+                });
+            }
+            self.getData();
+        }
+        ko.applyBindings(activitiesVM());
+    </script>
