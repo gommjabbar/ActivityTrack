@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ActivityTrack.Models.ProjectEO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<script src="~/Scripts/knockout-3.3.0.js"></script>
+<script src="~/Scripts/jquery-2.1.4.js"></script>
+
+<table>
+    <thead>
+        <tr><th>ID</th><th>Name</th></tr>
+    </thead>
+    <tbody data-bind="foreach: projects">
+        <tr>
+            <td data-bind="text: id"></td>
+            <td data-bind="text: name"></td>
+        </tr>
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    var projectsVM = function() {
+        var self = this;
+        self.projects = ko.observableArray([{ id: 1, name: "test" }]);
+        self.getData = function () {
+            $.getJSON("/api/projects", function (data) {
+                console.log(data);
+                self.projects(data.result);
+            });
+        }
+
+        self.getData();
+    }
+
+    ko.applyBindings(projectsVM());
+</script>
