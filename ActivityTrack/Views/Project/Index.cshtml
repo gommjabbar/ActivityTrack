@@ -24,43 +24,56 @@
     </tbody>
 </table>
 
-<p>Project name: <input data-bind="textInput:projectName"/></p>
+<p>Project name: <input data-bind="textInput:projectName, enterkey: validate" /></p>
 
-<button data-bind="click: add">Add</button>
+<button data-bind="click: add, enterkey: validate">Add</button>
 
-<script type="text/javascript">
-    
-    var viewModel = {
-        add : function() {
-            ko.applyBindings({ projectName: ko.observable("abc") });
-            var data = { id: 1, name: projectName };
-            $.post("/api/projects", data, function (returnedData) {
 
-            }).done(function () {
-                projectsVM.push(data.name);
-            }).error(function (error) {
-                alert(error);
-            });
-        }
-    };
+    <script type="text/javascript">
 
-    var project = function(data) {
-        var self = this;
-        self.name = ko.observable(data.name);
-    }
 
-    var projectsVM = function() {
-        var self = this;
-        self.projects = ko.observableArray([{ id: 1, name: "test" }]);
-        self.getData = function () {
-            $.getJSON("/api/projects", function (data) {
-
-                self.projects(data.result);
-            });
+        var project = function (data) {
+            var self = this;
+            self.name = ko.observable(data.name);
         }
 
-        self.getData();
-    }
+        var projectsVM = function () {
+            var self = this;
 
-    ko.applyBindings(projectsVM());
-</script>
+            self.projects = ko.observableArray([{ id: 1, name: "test" }]);
+            self.projectName = ko.observable();
+            self.getData = function () {
+                $.getJSON("/api/projects", function (data) {
+
+                    self.projects(data.result);
+                });
+            }
+            self.add = function () {
+                var data = { id: 0, name: self.projectName() };
+                $.post("/api/projects", data, function (returnedData) {
+
+                }).done(function (resultData) {
+                    projectsVM.projects.push(resultData);
+                }).error(function (error) {
+                    alert(error);
+                });
+
+
+            }
+            self.getData();
+
+            ko.bindingHandlers.enterkey = {
+                init: function (element, valueAccessor, allBindingsAccessor, data) {
+
+                    ko.utils.registerEventHandler(element, "keyup", function (e) {
+                        if (e.keyCode === 13) {
+                            valueAccessor().call(data);
+                        }
+
+                    });
+                }
+            };
+        }
+
+        ko.applyBindings(projectsVM());
+    </script>
