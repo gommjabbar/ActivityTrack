@@ -8,26 +8,53 @@
 
 <script src="~/Scripts/knockout-3.3.0.js"></script>
 <script src="~/Scripts/jquery-2.1.4.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+
+
+
 
 <table>
     <thead>
-        <tr><th>ID</th><th>Name</th></tr>
+        <tr><th>Name</th></tr>
     </thead>
     <tbody data-bind="foreach: projects">
         <tr>
-            <td data-bind="text: id"></td>
             <td data-bind="text: name"></td>
         </tr>
     </tbody>
 </table>
 
+<p>Project name: <input data-bind="textInput:projectName"/></p>
+
+<button data-bind="click: add">Add</button>
+
 <script type="text/javascript">
+    
+    var viewModel = {
+        add : function() {
+            ko.applyBindings({ projectName: ko.observable("abc") });
+            var data = { id: 1, name: projectName };
+            $.post("/api/projects", data, function (returnedData) {
+
+            }).done(function () {
+                projectsVM.push(data.name);
+            }).error(function (error) {
+                alert(error);
+            });
+        }
+    };
+
+    var project = function(data) {
+        var self = this;
+        self.name = ko.observable(data.name);
+    }
+
     var projectsVM = function() {
         var self = this;
         self.projects = ko.observableArray([{ id: 1, name: "test" }]);
         self.getData = function () {
             $.getJSON("/api/projects", function (data) {
-                console.log(data);
+
                 self.projects(data.result);
             });
         }
